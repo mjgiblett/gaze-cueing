@@ -1,0 +1,3 @@
+"""
+Provides graphical user interfaces.
+"""
