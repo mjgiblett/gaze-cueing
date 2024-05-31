@@ -40,7 +40,7 @@ class StartScene(Scene):
                 "\nYou may terminate the experiment at any time by pressing the ESCAPE key."
                 "\nPress ENTER when you are ready to begin the experiment."
             ),
-            fonts["heading"],
+            fonts["text"],
             (x_centre, 400),
             is_centred=True,
         )

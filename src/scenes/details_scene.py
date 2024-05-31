@@ -91,7 +91,7 @@ class DetailsScene(Scene):
                 is_centred=True,
             ),
             "age": Text(
-                "Please enter your age in years.",
+                "Please enter your age in years. Minimum 18.",
                 fonts["text"],
                 (x_centre, 850),
                 is_centred=True,
@@ -115,12 +115,12 @@ class DetailsScene(Scene):
                     "\n3 - Indigenous Australian"
                     "\n4 - African"
                     "\n5 - Hispanic"
-                    "\n6 - middle eastern"
-                    "\n7 - Pacific islander"
+                    "\n6 - Middle Eastern"
+                    "\n7 - Pacific Islander"
                     "\n8 - other not listed"
                     "\n9 - unspecified or prefer not to answer"
                 ),
-                fonts["text"],
+                fonts["small"],
                 (x_centre, 850),
                 is_centred=True,
             ),

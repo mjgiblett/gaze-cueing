@@ -12,6 +12,6 @@ def init_fonts() -> None:
     """
     fonts["title"] = pygame.font.SysFont("timesnewroman", 75)
     fonts["heading"] = pygame.font.SysFont("timesnewroman", 50)
-    fonts["text"] = pygame.font.SysFont("timesnewroman", 35)
+    fonts["text"] = pygame.font.SysFont("timesnewroman", 30)
     fonts["small"] = pygame.font.SysFont("timesnewroman", 20)
     fonts["button"] = pygame.font.SysFont("timesnewroman", 35, bold=True)
