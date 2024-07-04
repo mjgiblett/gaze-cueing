@@ -1,12 +1,12 @@
 """
-Module providing constants used by other modules.
+Module providing default project constants.
 """
 import pygame
 
 # Display
 
 FRAMERATE = 144
-DISPLAY_FRAMERATE = False
+SHOW_FRAMERATE = False
 
 IS_FULLSCREEN = True
 DISPLAY_WIDTH = 1200
@@ -39,5 +39,7 @@ TARGET_OFFSET = 500
 RANDOM_TRIAL_ORDER = True
 TRIAL_DEBUGGING = False
 
-SPECIES_COUNTERBALANCING = False  # When false, species of stimuli will be random.
-COUNTERBALANCING_ASCENDING = True
+SPECIES_COUNTERBALANCING = True  # Complete one species condition before the other.
+COUNTERBALANCING_ASCENDING = (
+    False  # Determines the order of counterbalancing. Humans first when True.
+)

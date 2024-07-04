@@ -29,7 +29,7 @@ def main(
     while action == QuitActionType.CONTINUE:
         screen.fill(BG_GREY)
         action = controller.process_game_events()
-        if DISPLAY_FRAMERATE:
+        if SHOW_FRAMERATE:
             show_fps(screen, clock, fonts.fonts["text"])
         pygame.display.update()
         clock.tick(FRAMERATE)
@@ -44,11 +44,11 @@ if __name__ == "__main__":
     from src.components.targets import init_targets
     from src.constants import (
         BG_GREY,
-        DISPLAY_FRAMERATE,
         DISPLAY_HEIGHT,
         DISPLAY_WIDTH,
         FRAMERATE,
         IS_FULLSCREEN,
+        SHOW_FRAMERATE,
     )
     from src.gui import fonts
 
