@@ -45,7 +45,6 @@ class ExperimentScene(Scene):
         self.trial_number = -1
 
         self.rest = False
-        self.finished = False
         self.rest_text = Text(
             (
                 "Take a break!"
@@ -79,9 +78,6 @@ class ExperimentScene(Scene):
             self.current_target.display(self.screen)
         if time - self.display_target_time >= MAX_RESPONSE_TIME:
             self.next_trial()
-
-    def update_state(self) -> bool:
-        return self.finished
 
     def key_down(self, key: int) -> None:
         time = pygame.time.get_ticks()
@@ -127,7 +123,7 @@ class ExperimentScene(Scene):
 
         self.trial_number += 1
         if self.trial_number >= self.trials_count:
-            self.finished = True
+            self.progress = True
             return
 
         self.display_stimulus_time = self.trial_start_time + INTER_TRIAL_INTERVAL

@@ -39,18 +39,14 @@ class OptionsScene(Scene):
             pos=(x_centre, 400),
             is_centred=True,
         )
-        self.complete = False
         self.test_checkbox = Checkbox(25, (x_centre, self.screen.get_height() // 2))
-
-    def button_down(self, _: int, pos: tuple[int, int]) -> None:
-        self.test_checkbox.is_clicked(pos)
-        if self.button.is_clicked(pos):
-            self.complete = True
 
     def display(self) -> None:
         self.button.display(self.screen)
         self.title.display(self.screen)
         self.test_checkbox.display(self.screen)
 
-    def update_state(self) -> bool:
-        return self.complete
+    def button_down(self, _: int, pos: tuple[int, int]) -> None:
+        self.test_checkbox.is_clicked(pos)
+        if self.button.is_clicked(pos):
+            self.progress = True

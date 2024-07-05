@@ -35,7 +35,6 @@ class DetailsScene(Scene):
 
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(screen)
-        self.complete = False
         self.participant_details: dict[str, int] = {}
         x_centre = self.screen.get_size()[0] // 2
 
@@ -138,9 +137,6 @@ class DetailsScene(Scene):
             if box.is_active:
                 info_text.display(self.screen)
 
-    def update_state(self) -> bool:
-        return self.complete
-
     def key_down(self, key: int) -> None:
         for box in self.input_boxes:
             if box.is_active:
@@ -170,7 +166,7 @@ class DetailsScene(Scene):
                         box.bg_colour = ERROR_RED
                         return
                 self.participant_details[title] = int(box.text)
-            self.complete = True
+            self.progress = True
             return
 
         for box in self.input_boxes:

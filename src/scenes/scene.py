@@ -39,18 +39,8 @@ class Scene:
 
     def __init__(self, screen: pygame.Surface) -> None:
         self.screen = screen
+        self.progress = False
 
-    @abstractmethod
-    def display(self) -> None:
-        """
-        Displays the scene on the main window.
-        Returns
-        -------
-        None
-        """
-        pass
-
-    @abstractmethod
     def update_state(self) -> bool:
         """
         Communicates to the SceneManager when to trasition from this scene to the next.
@@ -58,16 +48,12 @@ class Scene:
         -------
         bool
         """
-        pass
+        return self.progress
 
     @abstractmethod
-    def key_down(self, key: int) -> None:
+    def display(self) -> None:
         """
-        Handles key down events.
-        Parameters
-        ----------
-        key: int
-            pygame constant representing the pressed key.
+        Displays the scene on the main window.
         Returns
         -------
         None
@@ -84,6 +70,20 @@ class Scene:
             pygame constant representing the pressed mouse button.
         mouse_pos: Position
             Position of the cursor when button clicked.
+        Returns
+        -------
+        None
+        """
+        pass
+
+    @abstractmethod
+    def key_down(self, key: int) -> None:
+        """
+        Handles key down events.
+        Parameters
+        ----------
+        key: int
+            pygame constant representing the pressed key.
         Returns
         -------
         None

@@ -48,21 +48,18 @@ class StartScene(Scene):
         self.button = Button(
             text="Options", font=fonts["button"], pos=(x_centre, 800), is_centred=True
         )
-        self.starting = False
         self.options = False
 
     def button_down(self, _: int, pos: tuple[int, int]) -> None:
         if self.button.is_clicked(pos):
             self.options = True
+            self.progress = True
 
     def display(self) -> None:
         self.button.display(self.screen)
         self.text.display(self.screen)
         self.title.display(self.screen)
 
-    def update_state(self) -> bool:
-        return self.starting or self.options
-
     def key_down(self, key: int) -> None:
         if key == pygame.K_RETURN:
-            self.starting = True
+            self.progress = True
