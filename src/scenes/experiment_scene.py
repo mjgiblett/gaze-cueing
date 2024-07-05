@@ -19,6 +19,8 @@ class ExperimentScene(Scene):
     ----------
     screen: pygame.Surface
         The main window displaying the experiment.
+    participant_details: dict[str, int]
+        Detials of the participant.
     Methods
     -------
     display()

@@ -19,12 +19,15 @@ class FinishedScene(Scene):
     ----------
     screen: pygame.Surface
         The main window displaying the experiment.
+    trials: pandas.DataFrame
+        Contains participant details as well as data from all trials in the experiment.
+        The
     Methods
     -------
     display()
         Display the scene on the main window.
     save_output()
-        Saves all trials to excel file once experiment is finished.
+        Saves all trials to an Excel file once the experiment is finished.
     """
 
     def __init__(self, screen: pygame.Surface, trials: pandas.DataFrame) -> None:
