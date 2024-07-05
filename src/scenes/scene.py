@@ -3,8 +3,6 @@ from enum import IntEnum, auto
 
 import pygame
 
-from src.gui.position import Position
-
 
 class QuitActionType(IntEnum):
     """
@@ -61,14 +59,14 @@ class Scene:
         pass
 
     @abstractmethod
-    def button_down(self, button: int, mouse_pos: Position) -> None:
+    def button_down(self, button: int, mouse_pos: tuple[int, int]) -> None:
         """
         Handles mouse button down events.
         Parameters
         ----------
         button: int
             pygame constant representing the pressed mouse button.
-        mouse_pos: Position
+        mouse_pos: tuple[int, int]
             Position of the cursor when button clicked.
         Returns
         -------
@@ -91,12 +89,12 @@ class Scene:
         pass
 
     @abstractmethod
-    def mouse_motion(self, mouse_pos: Position) -> None:
+    def mouse_motion(self, mouse_pos: tuple[int, int]) -> None:
         """
         Handles mouse motion events.
         Parameters
         ----------
-        mouse_pos: Position
+        mouse_pos: tuple[int, int]
             Position of the cursor after motion.
         Returns
         -------

@@ -3,8 +3,6 @@ Defines Image class.
 """
 import pygame
 
-from src.gui.position import Position
-
 
 class Image:
     """
@@ -13,7 +11,7 @@ class Image:
     ----------
     surface: pygame.Surface
         The pygame surface of the image.
-    pos: Position
+    pos: tuple[int, int]
         Position of the surface on the screen.
     Methods
     -------
@@ -21,7 +19,7 @@ class Image:
         Displays the image.
     """
 
-    def __init__(self, surface: pygame.Surface, pos: Position) -> None:
+    def __init__(self, surface: pygame.Surface, pos: tuple[int, int]) -> None:
         self.surface = surface
         self.pos = pos
 

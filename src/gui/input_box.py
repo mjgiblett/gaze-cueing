@@ -1,7 +1,6 @@
 import pygame
 
 from src.constants import BLACK, WHITE
-from src.gui.position import Position
 
 
 class InputBox:
@@ -9,7 +8,7 @@ class InputBox:
         self,
         title: str,
         font: pygame.font.Font,
-        pos: Position,
+        pos: tuple[int, int],
         colour: pygame.Color = BLACK,
         is_numeric: bool = False,
         is_centred: bool = False,
@@ -19,7 +18,7 @@ class InputBox:
         self.is_active: bool = False
         self.title = title
         self.font = font
-        self.pos = int(pos[0]), int(pos[1])
+        self.pos = pos
         self.colour = colour
         self.bg_colour: pygame.Color | None = None
         self.is_numeric = is_numeric
@@ -53,7 +52,7 @@ class InputBox:
 
         return rect
 
-    def is_clicked(self, mouse_pos: Position) -> bool:
+    def is_clicked(self, mouse_pos: tuple[int, int]) -> bool:
         if self.border.collidepoint(mouse_pos):
             self.is_active = True
             self.bg_colour = WHITE

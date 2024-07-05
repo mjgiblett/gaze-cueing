@@ -1,7 +1,6 @@
 import pygame
 
 from src.constants import BLACK, DARK_GREY, LIGHT, SUBTLE
-from src.gui.position import Position
 
 
 class Button:
@@ -9,13 +8,13 @@ class Button:
         self,
         text: str,
         font: pygame.font.Font,
-        pos: Position,
+        pos: tuple[int, int],
         colour: pygame.Color = BLACK,
         is_centred: bool = False,
     ) -> None:
         self.text = text
         self.font = font
-        self.pos = int(pos[0]), int(pos[1])
+        self.pos = pos
         self.colour = colour
         self.is_centred = is_centred
         self.bg_colour = SUBTLE
@@ -48,11 +47,11 @@ class Button:
 
         return rect
 
-    def is_clicked(self, mouse_pos: Position) -> bool:
+    def is_clicked(self, mouse_pos: tuple[int, int]) -> bool:
         self.is_active = self.border.collidepoint(mouse_pos)
         return self.is_active
 
-    def on_hover(self, mouse_pos: Position) -> bool:
+    def on_hover(self, mouse_pos: tuple[int, int]) -> bool:
         collision = self.border.collidepoint(mouse_pos)
         if collision:
             self.bg_colour = LIGHT

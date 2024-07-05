@@ -1,7 +1,6 @@
 import pygame
 
 from src.constants import BLACK
-from src.gui.position import Position
 
 
 class Text:
@@ -9,7 +8,7 @@ class Text:
         self,
         text: str,
         font: pygame.font.Font,
-        pos: Position,
+        pos: tuple[int, int],
         colour: pygame.Color = BLACK,
         is_centred: bool = False,
         limit: int = 0,
@@ -17,7 +16,7 @@ class Text:
     ) -> None:
         self.text = text
         self.font = font
-        self.pos = int(pos[0]), int(pos[1])
+        self.pos = pos
         self.colour = colour
         self.is_centred = is_centred
         self.limit = limit

@@ -7,7 +7,6 @@ from src.constants import ERROR_RED
 from src.gui.button import Button
 from src.gui.fonts import fonts
 from src.gui.input_box import InputBox
-from src.gui.position import Position
 from src.gui.text import Text
 from src.scenes.scene import Scene
 
@@ -143,7 +142,7 @@ class DetailsScene(Scene):
                 box.edit_text(key)
                 return
 
-    def button_down(self, _: int, pos: Position) -> None:
+    def button_down(self, _: int, pos: tuple[int, int]) -> None:
         if self.button.is_clicked(pos):
             for box in self.input_boxes:
                 title = box.title
@@ -172,5 +171,5 @@ class DetailsScene(Scene):
         for box in self.input_boxes:
             box.is_clicked(pos)
 
-    def mouse_motion(self, mouse_pos: Position) -> None:
+    def mouse_motion(self, mouse_pos: tuple[int, int]) -> None:
         self.button.on_hover(mouse_pos)
