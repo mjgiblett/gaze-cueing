@@ -6,6 +6,7 @@ import pygame
 from src.scenes.details_scene import DetailsScene
 from src.scenes.experiment_scene import ExperimentScene
 from src.scenes.finished_scene import FinishedScene
+from src.scenes.options_scene import OptionsScene
 from src.scenes.scene import QuitActionType, Scene
 from src.scenes.start_scene import StartScene
 
@@ -69,7 +70,12 @@ class SceneManager:
         None
         """
         if isinstance(self.active_scene, StartScene):
-            self.active_scene = DetailsScene(self.active_scene.screen)
+            if self.active_scene.options:
+                self.active_scene = OptionsScene(self.active_scene.screen)
+            else:
+                self.active_scene = DetailsScene(self.active_scene.screen)
+        elif isinstance(self.active_scene, OptionsScene):
+            self.active_scene = StartScene(self.active_scene.screen)
         elif isinstance(self.active_scene, DetailsScene):
             self.active_scene = ExperimentScene(
                 self.active_scene.screen, self.active_scene.participant_details
