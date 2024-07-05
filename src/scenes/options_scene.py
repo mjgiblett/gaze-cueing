@@ -34,7 +34,7 @@ class OptionsScene(Scene):
             "Gaze Cueing Experiment", fonts["title"], (x_centre, 200), is_centred=True
         )
         self.button = Button(
-            text="Main Menu",
+            text="Back",
             font=fonts["button"],
             pos=(x_centre, 400),
             is_centred=True,

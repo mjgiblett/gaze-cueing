@@ -17,9 +17,6 @@ DISPLAY_HEIGHT = 1200
 WHITE = pygame.Color("white")
 BLACK = pygame.Color("black")
 BG_GREY = pygame.Color(175, 175, 175)
-DARK_GREY = pygame.Color(75, 75, 75)
-SUBTLE = pygame.Color(192, 190, 200)
-LIGHT = pygame.Color(224, 222, 244)
 ERROR_RED = pygame.Color(244, 80, 105)
 
 # Experiment parameters

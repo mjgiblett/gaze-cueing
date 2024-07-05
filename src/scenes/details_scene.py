@@ -40,7 +40,7 @@ class DetailsScene(Scene):
         self.title = Text(
             "Participant Details", fonts["title"], (x_centre, 200), is_centred=True
         )
-        self.button = Button("START", fonts["button"], (x_centre, 780), is_centred=True)
+        self.button = Button("Start", fonts["button"], (x_centre, 780), is_centred=True)
         self.headings = [
             Text("NUMBER", fonts["heading"], (x_centre, 350), is_centred=True),
             Text("AGE", fonts["heading"], (x_centre, 450), is_centred=True),
@@ -170,6 +170,3 @@ class DetailsScene(Scene):
 
         for box in self.input_boxes:
             box.is_clicked(pos)
-
-    def mouse_motion(self, mouse_pos: tuple[int, int]) -> None:
-        self.button.on_hover(mouse_pos)
