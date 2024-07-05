@@ -49,7 +49,7 @@ class SceneManager:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     return QuitActionType.QUIT
-                if event.key == pygame.K_q and isinstance(
+                if event.key == pygame.K_r and isinstance(
                     self.active_scene, FinishedScene
                 ):
                     return QuitActionType.RESTART

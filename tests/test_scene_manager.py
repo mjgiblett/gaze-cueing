@@ -46,7 +46,7 @@ class TestSceneManager(unittest.TestCase):
         self.assertIsInstance(self.scene_manager.active_scene, FinishedScene)
 
         # test restart
-        event = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_q)
+        event = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_r)
         pygame.event.post(event)
         self.assertEqual(
             self.scene_manager.process_game_events(), QuitActionType.RESTART
