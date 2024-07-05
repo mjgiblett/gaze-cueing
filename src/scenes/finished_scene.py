@@ -69,6 +69,10 @@ class FinishedScene(Scene):
         -------
         None
         """
+
+        if self.output.empty:
+            return
+
         number = self.output["participant_number"].min()
 
         data_labels = pandas.DataFrame(columns=["value"])
