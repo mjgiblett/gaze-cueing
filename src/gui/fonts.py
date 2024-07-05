@@ -10,8 +10,8 @@ def init_fonts() -> None:
     """
     Initiates fonts. Should be called immediantly after pygame initialisation.
     """
-    fonts["title"] = pygame.font.SysFont("timesnewroman", 75)
-    fonts["heading"] = pygame.font.SysFont("timesnewroman", 50)
-    fonts["text"] = pygame.font.SysFont("timesnewroman", 30)
-    fonts["small"] = pygame.font.SysFont("timesnewroman", 20)
-    fonts["button"] = pygame.font.SysFont("timesnewroman", 35, bold=True)
+    fonts["title"] = pygame.font.SysFont("calibri", 75, bold=True)
+    fonts["heading"] = pygame.font.SysFont("calibri", 40)
+    fonts["text"] = pygame.font.SysFont("calibri", 30)
+    fonts["small"] = pygame.font.SysFont("calibri", 20)
+    fonts["button"] = pygame.font.SysFont("calibri", 30, bold=True)
