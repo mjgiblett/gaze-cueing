@@ -1,3 +1,3 @@
 """
-Provides graphical user interfaces.
+Contains interactive visual elements. 
 """
