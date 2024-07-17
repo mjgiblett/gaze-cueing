@@ -3,13 +3,13 @@ Defines ExperimentScene class.
 """
 import pygame
 
-from src.components.fixation_cross import FixationCross
 from src.components.trials import Response, trials_init
 from src.constants import INTER_TRIAL_INTERVAL, MAX_RESPONSE_TIME, TRIAL_DEBUGGING
-from src.gui.fonts import fonts
-from src.gui.text import Text
-from src.gui.tools import show_trial
 from src.scenes.scene import Scene
+from src.visuals.fixation_cross import FixationCross
+from src.visuals.fonts import fonts
+from src.visuals.multiline_text import MultilineText
+from src.visuals.tools import show_trial
 
 
 class ExperimentScene(Scene):
@@ -45,7 +45,7 @@ class ExperimentScene(Scene):
         self.trial_number = -1
 
         self.rest = False
-        self.rest_text = Text(
+        self.rest_text = MultilineText(
             (
                 "Take a break!"
                 "\nWhen you are ready, press any key to continue with the experiment.\n"
@@ -55,7 +55,6 @@ class ExperimentScene(Scene):
             ),
             fonts["text"],
             (self.screen.get_width() // 2, 500),
-            is_centred=True,
         )
 
         self.next_trial()

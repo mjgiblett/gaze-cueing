@@ -3,8 +3,8 @@ Entry point to the experiment. Initiates pygame, fonts, main window, and game lo
 """
 import pygame
 
-from src.gui.tools import show_fps
 from src.services.scene_manager import QuitActionType, SceneManager
+from src.visuals.tools import show_fps
 
 
 def main(
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         IS_FULLSCREEN,
         SHOW_FRAMERATE,
     )
-    from src.gui import fonts
+    from src.visuals import fonts
 
     pygame.init()
     fonts.init_fonts()

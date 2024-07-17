@@ -7,9 +7,9 @@ import pygame
 from src.components.stimuli import StimulusGazeDirection, StimulusSpecies
 from src.components.targets import TargetLetter, TargetLocation
 from src.components.trials import Response, Validity
-from src.gui.fonts import fonts
-from src.gui.text import Text
 from src.scenes.scene import Scene
+from src.visuals.fonts import fonts
+from src.visuals.multiline_text import MultilineText
 
 
 class FinishedScene(Scene):
@@ -53,17 +53,15 @@ class FinishedScene(Scene):
         ]
         self.save_output()
 
-        self.finished_text = Text(
+        finished_text = MultilineText(
             (
                 "Experiment completed!\nThank you for participating!\n\nPress ESCAPE to quit or R to restart."
             ),
             fonts["text"],
             (self.screen.get_width() // 2, self.screen.get_height() // 2),
-            is_centred=True,
         )
 
-    def display(self) -> None:
-        self.finished_text.display(self.screen)
+        self.elements.append(finished_text)
 
     def save_output(self) -> None:
         """

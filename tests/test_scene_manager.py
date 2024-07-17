@@ -56,3 +56,7 @@ class TestSceneManager(unittest.TestCase):
         self.assertEqual(
             self.scene_manager.process_game_events(), QuitActionType.CONTINUE
         )
+
+
+if __name__ == "__main__":
+    unittest.main()

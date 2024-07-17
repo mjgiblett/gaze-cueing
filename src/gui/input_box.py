@@ -1,67 +1,50 @@
 import pygame
 
 from src.constants import BLACK, WHITE
+from src.gui.interactive_text import InteractiveText
+from src.visuals.text import Text
 
 
-class InputBox:
+class InputBox(InteractiveText):
     def __init__(
         self,
-        title: str,
-        font: pygame.font.Font,
-        pos: tuple[int, int],
-        colour: pygame.Color = BLACK,
+        text: Text,
+        position: tuple[int, int] = (0, 0),
+        size: tuple[int, int] = (60, 30),
+        name: str = "",
+        background_colour: pygame.Color | None = None,
+        border_colour: pygame.Color | None = BLACK,
+        is_enabled: bool = True,
+        is_active: bool = False,
+        border_width: int = 4,
+        border_radius: int = 10,
         is_numeric: bool = False,
-        is_centred: bool = False,
-        char_limit: int = 10,
+        char_limit: int = 0,
     ) -> None:
-        self.text: str = ""
-        self.is_active: bool = False
-        self.title = title
-        self.font = font
-        self.pos = pos
-        self.colour = colour
-        self.bg_colour: pygame.Color | None = None
+        super().__init__(
+            text,
+            position,
+            size,
+            name,
+            background_colour,
+            border_colour,
+            is_enabled,
+            is_active,
+            border_width,
+            border_radius,
+        )
         self.is_numeric = is_numeric
-        self.is_centred = is_centred
         self.char_limit = char_limit
 
-        self.border = self.create_border()
+    def clicked(self) -> None:
+        self.is_active = True
+        self.background_colour = WHITE
 
-    def display(self, screen: pygame.Surface) -> None:
-        if self.bg_colour:
-            pygame.draw.rect(screen, self.bg_colour, self.border, border_radius=10)
-        pygame.draw.rect(screen, BLACK, self.border, 2, border_radius=10)
-        text = self.font.render(self.text, True, self.colour)
-        text_rect = text.get_rect()
-        if self.is_centred:
-            text_rect.center = self.pos
-        else:
-            text_rect.topleft = self.pos
-
-        screen.blit(text, text_rect)
-
-    def create_border(self) -> pygame.Rect:
-        default_size = self.font.size("------------")
-        text_size = self.font.size(self.text)
-        size = default_size if default_size[0] > text_size[0] else text_size
-
-        rect = pygame.Rect(self.pos, size)
-        if self.is_centred:
-            rect.center = self.pos
-        rect = rect.inflate(int(size[0] * 0.1), int(size[1] * 0.1))
-
-        return rect
-
-    def is_clicked(self, mouse_pos: tuple[int, int]) -> bool:
-        if self.border.collidepoint(mouse_pos):
-            self.is_active = True
-            self.bg_colour = WHITE
-            return True
+    def not_clicked(self) -> None:
         self.is_active = False
-        self.bg_colour = None
-        return False
+        self.background_colour = None
 
-    def edit_text(self, key: int) -> None:
+    def key_down(self, key: int) -> None:
         if not self.is_active:
             return
         if not key:
@@ -69,17 +52,17 @@ class InputBox:
 
         name: str = pygame.key.name(key)
         if name == "return":
-            self.is_active = False
+            self.not_clicked()
             return
         if name == "backspace":
-            self.text = self.text[:-1]
-            self.border = self.create_border()
+            self.text.string = self.text.string[:-1]
+            self.set_rect()
             return
-        if len(self.text) >= self.char_limit:
+        if len(self.text.string) >= self.char_limit:
             return
 
         if self.is_numeric and name.isnumeric():
-            self.text += name
+            self.text.string += name
         elif not self.is_numeric and (name.isalpha() or name.isnumeric()):
-            self.text += name
-        self.border = self.create_border()
+            self.text.string += name
+        self.set_rect()

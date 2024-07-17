@@ -1,3 +1,3 @@
 """
-Defines experiment specefic componenets. 
+Defines experiment specific components. 
 """

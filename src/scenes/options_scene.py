@@ -3,11 +3,12 @@ Defines OptionsScene class.
 """
 import pygame
 
+from src.constants import BG_GREY
 from src.gui.button import Button
 from src.gui.checkbox import Checkbox
-from src.gui.fonts import fonts
-from src.gui.text import Text
 from src.scenes.scene import Scene
+from src.visuals.fonts import fonts
+from src.visuals.text import Text
 
 
 class OptionsScene(Scene):
@@ -30,23 +31,24 @@ class OptionsScene(Scene):
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(screen)
         x_centre = self.screen.get_width() // 2
-        self.title = Text(
-            "Gaze Cueing Experiment", fonts["title"], (x_centre, 200), is_centred=True
-        )
-        self.button = Button(
-            text="Back",
-            font=fonts["button"],
-            pos=(x_centre, 400),
-            is_centred=True,
-        )
-        self.test_checkbox = Checkbox(25, (x_centre, self.screen.get_height() // 2))
 
-    def display(self) -> None:
-        self.button.display(self.screen)
-        self.title.display(self.screen)
-        self.test_checkbox.display(self.screen)
+        title = Text("Gaze Cueing Experiment", fonts["title"], (x_centre, 200))
+        back_button = Button(
+            text=Text("Back", fonts["button"], colour=BG_GREY),
+            position=(x_centre, 400),
+            name="back",
+        )
+
+        checkbox = Checkbox((x_centre, self.screen.get_height() // 2), (25, 25))
+
+        self.elements.append(title)
+
+        self.interactables.append(back_button)
+        self.interactables.append(checkbox)
 
     def button_down(self, _: int, pos: tuple[int, int]) -> None:
-        self.test_checkbox.is_clicked(pos)
-        if self.button.is_clicked(pos):
-            self.progress = True
+        for interactable in self.interactables:
+            if not interactable.is_clicked(pos):
+                continue
+            if interactable.name == "back":
+                self.progress = True

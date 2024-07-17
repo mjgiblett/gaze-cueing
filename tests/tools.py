@@ -1,7 +1,7 @@
 import pygame
 
 from src.constants import DISPLAY_HEIGHT, DISPLAY_WIDTH
-from src.gui import fonts
+from src.visuals import fonts
 
 
 def minimal_setup() -> pygame.Surface:

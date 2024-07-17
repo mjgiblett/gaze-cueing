@@ -1,27 +1,40 @@
-from dataclasses import dataclass
-
 import pygame
 
 from src.constants import BLACK, WHITE
+from src.gui.interactive import Interactive
 
 
-@dataclass
-class Checkbox:
-    size: int
-    pos: tuple[int, int]
-    border_radius: int = 4
-    is_active: bool = False
-
-    def __post_init__(self) -> None:
-        self.rect = pygame.Rect(self.pos, (self.size, self.size))
+class Checkbox(Interactive):
+    def __init__(
+        self,
+        position: tuple[int, int] = (0, 0),
+        size: tuple[int, int] = (25, 25),
+        name: str = "",
+        background_colour: pygame.Color = WHITE,
+        border_colour: pygame.Color = BLACK,
+        is_enabled: bool = True,
+        is_active: bool = False,
+        border_width: int = 4,
+        border_radius: int = 0,
+    ) -> None:
+        super().__init__(
+            position,
+            size,
+            name,
+            background_colour,
+            border_colour,
+            is_enabled,
+            is_active,
+            border_width,
+            border_radius,
+        )
 
     def display(self, screen: pygame.Surface) -> None:
         if self.is_active:
             pygame.draw.rect(screen, WHITE, self.rect)
-        pygame.draw.rect(screen, BLACK, self.rect, self.border_radius)
+        pygame.draw.rect(
+            screen, BLACK, self.rect, self.border_width, self.border_radius
+        )
 
-    def is_clicked(self, mouse_pos: tuple[int, int]) -> bool:
-        is_clicked = self.rect.collidepoint(mouse_pos)
-        if is_clicked:
-            self.is_active = not self.is_active
-        return is_clicked
+    def clicked(self) -> None:
+        self.is_active = not self.is_active

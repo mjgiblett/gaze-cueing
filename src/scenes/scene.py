@@ -3,6 +3,9 @@ from enum import IntEnum, auto
 
 import pygame
 
+from src.gui.interactive import Interactive
+from src.visuals.element import Element
+
 
 class QuitActionType(IntEnum):
     """
@@ -38,6 +41,8 @@ class Scene:
     def __init__(self, screen: pygame.Surface) -> None:
         self.screen = screen
         self.progress = False
+        self.elements: list[Element] = []
+        self.interactables: list[Interactive] = []
 
     def update_state(self) -> bool:
         """
@@ -48,7 +53,6 @@ class Scene:
         """
         return self.progress
 
-    @abstractmethod
     def display(self) -> None:
         """
         Displays the scene on the main window.
@@ -56,7 +60,10 @@ class Scene:
         -------
         None
         """
-        pass
+        for element in self.elements:
+            element.display(self.screen)
+        for interactable in self.interactables:
+            interactable.display(self.screen)
 
     @abstractmethod
     def button_down(self, button: int, mouse_pos: tuple[int, int]) -> None:

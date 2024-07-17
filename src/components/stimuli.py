@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pygame
 
-from src.components.image import Image
 from src.constants import STIMULUS_SCALE
+from src.visuals.image import Image
 
 
 class StimulusSpecies(IntEnum):

@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pygame
 
-from src.components.image import Image
 from src.constants import TARGET_OFFSET, TARGET_SCALE
+from src.visuals.image import Image
 
 
 class TargetLetter(IntEnum):
