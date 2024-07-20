@@ -1,13 +1,15 @@
 import unittest
+from unittest.mock import Mock
 
 import pygame
 
+from src.constants import BLACK
 from src.visuals.fixation_cross import FixationCross
 from tests.tools import minimal_setup
 
 size = (25, 25)
 name = "bob"
-is_enabled = False
+is_enabled = True
 
 
 class TestElement(unittest.TestCase):
@@ -26,6 +28,41 @@ class TestElement(unittest.TestCase):
         self.assertEqual(is_enabled, self.fixation_cross.is_enabled)
         self.assertIsInstance(self.fixation_cross.rect, pygame.Rect)
         self.assertIsInstance(self.fixation_cross.rects, list)
+
+    def test_position_assignment(self):
+        with self.assertRaises(AttributeError):
+            self.fixation_cross.position = (0, 0)
+
+    def test_size_assignment(self):
+        with self.assertRaises(AttributeError):
+            self.fixation_cross.size = (0, 0)
+
+    def test_rect_assignment(self):
+        with self.assertRaises(AttributeError):
+            self.fixation_cross.rect = pygame.Rect((0, 0), (0, 0))
+
+    def test_rects_assignment(self):
+        with self.assertRaises(AttributeError):
+            self.fixation_cross.rects = []
+
+    def test_display_when_enabled(self) -> None:
+        pygame.draw.rect = Mock()
+        self.fixation_cross.display(self.screen)
+
+        # check if fixation cross calls the pygame.draw.rect method.
+        self.assertTrue(pygame.draw.rect.called)
+
+        # Check if fixation cross calls the rect method with the correct parameters
+        for rect in self.fixation_cross.rects:
+            pygame.draw.rect.assert_any_call(self.screen, BLACK, rect)
+
+    def test_display_when_disabled(self) -> None:
+        pygame.draw.rect = Mock()
+        self.fixation_cross.is_enabled = False
+        self.fixation_cross.display(self.screen)
+
+        # check if fixation cross calls the pygame.draw.rect method.
+        self.assertFalse(pygame.draw.rect.called)
 
 
 if __name__ == "__main__":
