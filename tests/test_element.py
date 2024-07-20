@@ -38,6 +38,17 @@ class TestElement(unittest.TestCase):
         self.element.size = new_size
         self.assertEqual(self.element.size, new_size)
 
+    def test_change_rect(self) -> None:
+        new_rect_position = (100, 100)
+        new_rect_size = (50, 50)
+        new_rect = pygame.Rect(new_rect_position, new_rect_size)
+
+        self.element.rect = new_rect
+
+        self.assertEqual(self.element.rect, new_rect)
+        self.assertEqual(self.element.position, position)
+        self.assertEqual(self.element.size, new_rect_size)
+
 
 if __name__ == "__main__":
     unittest.main()
