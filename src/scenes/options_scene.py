@@ -34,7 +34,7 @@ class OptionsScene(Scene):
 
         title = Text("Gaze Cueing Experiment", fonts["title"], (x_centre, 200))
         back_button = Button(
-            text=Text("Back", fonts["button"], colour=BG_GREY),
+            text=Text("Back", fonts["button"], text_colour=BG_GREY),
             position=(x_centre, 400),
             name="back",
         )

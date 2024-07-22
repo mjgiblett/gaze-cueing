@@ -90,7 +90,7 @@ class DetailsScene(Scene):
         )
 
         start_button = Button(
-            Text("Start", fonts["button"], colour=BG_GREY),
+            Text("Start", fonts["button"], text_colour=BG_GREY),
             (x_centre, 780),
             name="start",
         )

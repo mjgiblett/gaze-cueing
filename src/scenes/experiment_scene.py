@@ -72,9 +72,9 @@ class ExperimentScene(Scene):
         self.fixation_cross.draw(self.screen)
 
         if time >= self.display_stimulus_time:
-            self.current_stimulus.display(self.screen)
+            self.current_stimulus.draw(self.screen)
         if time >= self.display_target_time:
-            self.current_target.display(self.screen)
+            self.current_target.draw(self.screen)
         if time - self.display_target_time >= MAX_RESPONSE_TIME:
             self.next_trial()
 

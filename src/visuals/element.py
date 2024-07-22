@@ -14,7 +14,7 @@ class Element:
     Attributes
     ----------
     position : tuple[int, int]
-        The x, y coordinates of the element on the screen.
+        The x, y coordinates of the element.
     size : tuple[int, int]
         The width and height of the element.
     name : str
@@ -59,8 +59,7 @@ class Element:
         Parameters
         ----------
         position : tuple[int, int], optional
-            The x, y coordinates of the element on the screen. Defaults
-            to (0, 0).
+            The x, y coordinates of the element. Defaults to (0, 0).
         size : tuple[int, int], optional
             The width and height of the element. Defaults to (0, 0).
         name : str, optional

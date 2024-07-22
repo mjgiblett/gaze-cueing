@@ -30,7 +30,7 @@ class TestText(unittest.TestCase):
         self.assertEqual(self.text.string, string)
         self.assertEqual(self.text.font, font)
         self.assertEqual(self.text.position, position)
-        self.assertEqual(self.text.colour, colour)
+        self.assertEqual(self.text.text_colour, colour)
         self.assertEqual(self.text.name, name)
         self.assertEqual(self.text.is_enabled, is_enabled)
         self.assertIsInstance(self.text.render, pygame.Surface)
@@ -57,6 +57,14 @@ class TestText(unittest.TestCase):
         self.assertNotEqual(self.text.size, old_size)
         self.assertEqual(self.text.position, old_position)
         self.assertEqual(self.text.font, new_font)
+
+    def test_size_assignment(self):
+        with self.assertRaises(AttributeError):
+            self.text.size = (0, 0)
+
+    def test_rect_assignment(self):
+        with self.assertRaises(AttributeError):
+            self.text.rect = pygame.Rect((0, 0), (0, 0))
 
     def test_display_when_enabled(self) -> None:
         blit_wrapper = test_blit(self, self.text, self.screen)

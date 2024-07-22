@@ -45,12 +45,12 @@ class StartScene(Scene):
             (x_centre, 400),
         )
         next_button = Button(
-            Text("Next", font=fonts["button"], colour=BG_GREY),
+            Text("Next", font=fonts["button"], text_colour=BG_GREY),
             position=(x_centre, 700),
             name="next",
         )
         option_button = Button(
-            text=Text("Options", font=fonts["button"], colour=BG_GREY),
+            text=Text("Options", font=fonts["button"], text_colour=BG_GREY),
             position=(x_centre, 800),
             name="option",
         )

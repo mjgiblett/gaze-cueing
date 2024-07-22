@@ -28,8 +28,8 @@ class Image(Element):
 
     Methods
     -------
-    display(screen: pygame.Surface) -> None
-        Renders the image on the provided screen if enabled.
+    draw(screen: pygame.Surface) -> None
+        Draws the image on the provided surface if enabled.
     set_rect() -> None
         Sets the rectangular area occupied by the image based on its
         position and size.
@@ -51,8 +51,7 @@ class Image(Element):
         surface: pygame.Surface
             The pygame object representing the image.
         position : tuple[int, int], optional
-            The x, y coordinates of the element on the screen. Defaults
-            to (0, 0).
+            The x, y coordinates of the element. Defaults to (0, 0).
         size : tuple[int, int], optional
             The width and height of the element. Defaults to (0, 0).
         name : str, optional

@@ -52,7 +52,7 @@ class MultilineText(Element):
     def colour(self, colour: pygame.Color) -> None:
         self._colour = colour
         for line in self.lines:
-            line.colour = colour
+            line.text_colour = colour
 
     @property
     def position(self) -> tuple[int, int]:

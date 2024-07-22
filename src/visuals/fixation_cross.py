@@ -21,7 +21,7 @@ class FixationCross(Element):
     screen : pygame.Surface
         The main window displaying the experiment.
     position : tuple[int, int]
-        The x, y coordinates of the fixation cross on the screen,
+        The x, y coordinates of the fixation cross.
         centered by default. This property is read-only.
     size : tuple[int, int]
         The width and height of the fixation cross. This property is
