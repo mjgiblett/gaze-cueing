@@ -74,8 +74,8 @@ class MultilineText(Element):
             pos = (self.position[0], self.position[1] + (x * line_height))
             self._lines.append(Text(line, self.font, pos, self.colour))
 
-    def display(self, screen: pygame.Surface) -> None:
+    def draw(self, screen: pygame.Surface) -> None:
         if not self.is_enabled:
             return
         for line in self.lines:
-            line.display(screen)
+            line.draw(screen)

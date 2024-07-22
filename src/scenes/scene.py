@@ -61,9 +61,9 @@ class Scene:
         None
         """
         for element in self.elements:
-            element.display(self.screen)
+            element.draw(self.screen)
         for interactable in self.interactables:
-            interactable.display(self.screen)
+            interactable.draw(self.screen)
 
     @abstractmethod
     def button_down(self, button: int, mouse_pos: tuple[int, int]) -> None:

@@ -1,18 +1,15 @@
 """
-This module defines an abstract base class for visual and GUI elements. 
-The Element class includes essential attributes such as position, size, 
-name, and enabled stutus. It also includes an abstract method for 
-displaying the element on the screen, which must be implemented by 
-any subclasses.
+This module defines a base class for visual and GUI elements. 
+The Element class includes essential attributes such as position, size,
+name, colour, border, and enabled stutus.
 """
-from abc import ABC, abstractmethod
 
 import pygame
 
 
-class Element(ABC):
+class Element:
     """
-    Abstract base class for all visual and GUI elements.
+    Base class for all visual and GUI elements.
 
     Attributes
     ----------
@@ -22,6 +19,15 @@ class Element(ABC):
         The width and height of the element.
     name : str
         The name of the element.
+    background_colour : pygame.Color | None, optional
+        The colour of the element's border. Defaults to None.
+    border_colour : pygame.Color | None, optional
+        The colour of the element's background. Defaults to None.
+    border_width : int, optional
+        The width of the element's border. Defaults to 4.
+    border_radius: int, optional
+        The radius of the border's rounded corners. Defaults to 0
+        (rectangle without rounded corners).
     is_enabled : bool
         A flag indicating whether the element is displayed.
     rect : pygame.Rect
@@ -29,8 +35,8 @@ class Element(ABC):
 
     Methods
     -------
-    display(screen: pygame.Surface) -> None
-        Renders the element on the provided screen if enabled.
+    draw(surface: pygame.Surface) -> None
+        Draws the element on the provided surface if enabled.
     set_rect() -> None
         Sets the rectangular area occupied by the element based on its
         position and size.
@@ -41,6 +47,10 @@ class Element(ABC):
         position: tuple[int, int] = (0, 0),
         size: tuple[int, int] = (0, 0),
         name: str = "",
+        background_colour: pygame.Color | None = None,
+        border_colour: pygame.Color | None = None,
+        border_width: int = 4,
+        border_radius: int = 0,
         is_enabled: bool = True,
     ) -> None:
         """
@@ -55,6 +65,15 @@ class Element(ABC):
             The width and height of the element. Defaults to (0, 0).
         name : str, optional
             The name of the element. Defaults to an empty string.
+        background_colour : pygame.Color | None, optional
+            The colour of the element's border. Defaults to None.
+        border_colour : pygame.Color | None, optional
+            The colour of the element's background. Defaults to None.
+        border_width : int, optional
+            The width of the element's border. Defaults to 4.
+        border_radius: int, optional
+            The radius of the border's rounded corners. Defaults to 0
+            (rectangle without rounded corners).
         is_enabled : bool, optional
             A flag indicating whether the element is displayed. Defaults
             to True.
@@ -62,6 +81,10 @@ class Element(ABC):
         self._position = position
         self._size = size
         self.name = name
+        self.background_colour = background_colour
+        self.border_colour = border_colour
+        self.border_width = border_width
+        self.border_radius = border_radius
         self.is_enabled = is_enabled
         self.set_rect()
 
@@ -118,21 +141,36 @@ class Element(ABC):
         self._rect.center = self.position
         self._size = self.rect.size
 
-    @abstractmethod
-    def display(self, screen: pygame.Surface) -> None:
+    def draw(self, surface: pygame.Surface) -> None:
         """
-        Renders the element on the provided screen if enabled.
+        Draws the element on the provided surface if enabled.
 
         Parameters
         ----------
-        screen: pygame.Surface
-            The main window displaying the experiment.
+        surface: pygame.Surface
+            The surface on which the element will be drawn on.
 
         Returns
         -------
         None
         """
-        pass
+        if not self.is_enabled:
+            return
+        if self.background_colour:
+            pygame.draw.rect(
+                surface,
+                self.background_colour,
+                self.rect,
+                border_radius=self.border_radius,
+            )
+        if self.border_colour:
+            pygame.draw.rect(
+                surface,
+                self.border_colour,
+                self.rect,
+                self.border_width,
+                self.border_radius,
+            )
 
     def set_rect(self) -> None:
         """

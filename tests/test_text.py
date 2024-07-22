@@ -5,7 +5,7 @@ import pygame
 from src.constants import BLACK
 from src.visuals.fonts import fonts
 from src.visuals.text import Text
-from tests.tools import minimal_setup
+from tests.tools import minimal_setup, test_blit
 
 screen = minimal_setup()
 
@@ -14,7 +14,7 @@ font: pygame.font.Font = fonts["text"]
 position: tuple[int, int] = (40, 30)
 colour: pygame.Color = BLACK
 name: str = "victor"
-is_enabled: bool = False
+is_enabled: bool = True
 
 
 class TestText(unittest.TestCase):
@@ -26,7 +26,7 @@ class TestText(unittest.TestCase):
     def setUp(self) -> None:
         self.text = Text(string, font, position, colour, name, is_enabled)
 
-    def test_text_init(self) -> None:
+    def test_init(self) -> None:
         self.assertEqual(self.text.string, string)
         self.assertEqual(self.text.font, font)
         self.assertEqual(self.text.position, position)
@@ -58,8 +58,15 @@ class TestText(unittest.TestCase):
         self.assertEqual(self.text.position, old_position)
         self.assertEqual(self.text.font, new_font)
 
-    def test_display_text(self) -> None:
-        self.text.display(self.screen)
+    def test_display_when_enabled(self) -> None:
+        blit_wrapper = test_blit(self, self.text, self.screen)
+        self.assertTrue(
+            ((self.text.render, self.text.rect), {}) in blit_wrapper.blit_calls
+        )
+
+    def test_display_when_disabled(self) -> None:
+        self.text.is_enabled = False
+        test_blit(self, self.text, self.screen, False)
 
 
 if __name__ == "__main__":

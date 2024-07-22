@@ -14,10 +14,10 @@ class InputBox(InteractiveText):
         name: str = "",
         background_colour: pygame.Color | None = None,
         border_colour: pygame.Color | None = BLACK,
-        is_enabled: bool = True,
-        is_active: bool = False,
         border_width: int = 4,
         border_radius: int = 10,
+        is_enabled: bool = True,
+        is_active: bool = False,
         is_numeric: bool = False,
         char_limit: int = 0,
     ) -> None:
@@ -28,10 +28,10 @@ class InputBox(InteractiveText):
             name,
             background_colour,
             border_colour,
-            is_enabled,
-            is_active,
             border_width,
             border_radius,
+            is_enabled,
+            is_active,
         )
         self.is_numeric = is_numeric
         self.char_limit = char_limit

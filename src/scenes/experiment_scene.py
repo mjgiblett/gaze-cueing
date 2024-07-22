@@ -61,7 +61,7 @@ class ExperimentScene(Scene):
 
     def display(self) -> None:
         if self.rest:
-            self.rest_text.display(self.screen)
+            self.rest_text.draw(self.screen)
             return
         time = pygame.time.get_ticks()
         if TRIAL_DEBUGGING and self.trial_number > 0:
@@ -69,7 +69,7 @@ class ExperimentScene(Scene):
                 self.screen, self.trials.loc[self.trial_number - 1], fonts["small"]
             )
 
-        self.fixation_cross.display(self.screen)
+        self.fixation_cross.draw(self.screen)
 
         if time >= self.display_stimulus_time:
             self.current_stimulus.display(self.screen)

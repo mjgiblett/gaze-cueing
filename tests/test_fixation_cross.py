@@ -1,11 +1,10 @@
 import unittest
-from unittest.mock import Mock
 
 import pygame
 
 from src.constants import BLACK
 from src.visuals.fixation_cross import FixationCross
-from tests.tools import minimal_setup
+from tests.tools import minimal_setup, test_draw_rect
 
 size = (25, 25)
 name = "bob"
@@ -46,23 +45,15 @@ class TestElement(unittest.TestCase):
             self.fixation_cross.rects = []
 
     def test_display_when_enabled(self) -> None:
-        pygame.draw.rect = Mock()
-        self.fixation_cross.display(self.screen)
-
-        # check if fixation cross calls the pygame.draw.rect method.
-        self.assertTrue(pygame.draw.rect.called)
+        test_draw_rect(self, self.fixation_cross, self.screen)
 
         # Check if fixation cross calls the rect method with the correct parameters
         for rect in self.fixation_cross.rects:
             pygame.draw.rect.assert_any_call(self.screen, BLACK, rect)
 
     def test_display_when_disabled(self) -> None:
-        pygame.draw.rect = Mock()
         self.fixation_cross.is_enabled = False
-        self.fixation_cross.display(self.screen)
-
-        # check if fixation cross calls the pygame.draw.rect method.
-        self.assertFalse(pygame.draw.rect.called)
+        test_draw_rect(self, self.fixation_cross, self.screen, False)
 
 
 if __name__ == "__main__":

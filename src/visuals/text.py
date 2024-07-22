@@ -56,7 +56,7 @@ class Text(Element):
         rect.center = self.position
         self.rect = rect
 
-    def display(self, screen: pygame.Surface) -> None:
+    def draw(self, screen: pygame.Surface) -> None:
         if not self.is_enabled:
             return
         screen.blit(self.render, self.rect)

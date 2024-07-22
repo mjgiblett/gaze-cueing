@@ -1,15 +1,19 @@
 import unittest
-from unittest.mock import patch
 
 import pygame
 
+from src.constants import BLACK, WHITE
 from src.visuals.element import Element
-from tests.tools import minimal_setup
+from tests.tools import minimal_setup, test_draw_rect
 
 position = (10, 10)
 size = (25, 25)
 name = "bob"
-is_enabled = False
+background_colour = None
+border_colour = None
+border_width = 6
+border_radius = 10
+is_enabled = True
 
 
 class TestElement(unittest.TestCase):
@@ -18,9 +22,17 @@ class TestElement(unittest.TestCase):
         super(TestElement, cls).setUpClass()
         cls.screen = minimal_setup()
 
-    @patch.multiple(Element, __abstractmethods__=set())
     def setUp(self) -> None:
-        self.element = Element(position, size, name, is_enabled)
+        self.element = Element(
+            position,
+            size,
+            name,
+            background_colour,
+            border_colour,
+            border_width,
+            border_radius,
+            is_enabled,
+        )
 
     def test_init_element(self) -> None:
         self.assertEqual(position, self.element.position)
@@ -48,6 +60,38 @@ class TestElement(unittest.TestCase):
         self.assertEqual(self.element.rect, new_rect)
         self.assertEqual(self.element.position, position)
         self.assertEqual(self.element.size, new_rect_size)
+
+    def test_draw_nothing_enabled(self) -> None:
+        test_draw_rect(self, self.element, self.screen, False)
+
+    def test_draw_nothing_disabled(self) -> None:
+        self.element.is_enabled = False
+        test_draw_rect(self, self.element, self.screen, False)
+
+    def test_draw_background(self) -> None:
+        self.element.background_colour = BLACK
+        test_draw_rect(self, self.element, self.screen)
+        pygame.draw.rect.assert_any_call(
+            self.screen, BLACK, self.element.rect, border_radius=border_radius
+        )
+
+    def test_draw_border(self) -> None:
+        self.element.border_colour = WHITE
+        test_draw_rect(self, self.element, self.screen)
+        pygame.draw.rect.assert_any_call(
+            self.screen, WHITE, self.element.rect, border_width, border_radius
+        )
+
+    def test_draw_background_and_border(self) -> None:
+        self.element.background_colour = BLACK
+        self.element.border_colour = WHITE
+        test_draw_rect(self, self.element, self.screen)
+        pygame.draw.rect.assert_any_call(
+            self.screen, BLACK, self.element.rect, border_radius=border_radius
+        )
+        pygame.draw.rect.assert_any_call(
+            self.screen, WHITE, self.element.rect, border_width, border_radius
+        )
 
 
 if __name__ == "__main__":

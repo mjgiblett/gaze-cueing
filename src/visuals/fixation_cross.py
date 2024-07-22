@@ -33,8 +33,8 @@ class FixationCross(Element):
 
     Methods
     -------
-    display(screen: pygame.Surface) -> None
-        Renders the fixation cross on the provided screen if enabled.
+    draw(surface: pygame.Surface) -> None
+        Draws the fixation cross on the provided surface if enabled.
     set_rect() -> None
         Sets the position and dimensions of the fixation cross rectangles.
     """
@@ -63,7 +63,7 @@ class FixationCross(Element):
             Defaults to True.
         """
         position = screen.get_width() // 2, screen.get_height() // 2
-        super().__init__(position, size, name, is_enabled)
+        super().__init__(position, size, name, is_enabled=is_enabled)
 
     @property
     def position(self) -> tuple[int, int]:
@@ -113,19 +113,19 @@ class FixationCross(Element):
         """
         return self._rects
 
-    def display(self, screen: pygame.Surface) -> None:
+    def draw(self, surface: pygame.Surface) -> None:
         """
-        Renders the fixation cross on the provided screen if it is enabled.
+        Draws the fixation cross on the provided surface if it is enabled.
 
         Parameters
         ----------
-        screen : pygame.Surface
-            The main window displaying the experiment.
+        surface: pygame.Surface
+            The surface on which the fixation cross will be drawn on.
         """
         if not self.is_enabled:
             return
         for rect in self.rects:
-            pygame.draw.rect(screen, BLACK, rect)
+            pygame.draw.rect(surface, BLACK, rect)
 
     def set_rect(self) -> None:
         """

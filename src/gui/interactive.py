@@ -1,5 +1,3 @@
-from abc import abstractmethod
-
 import pygame
 
 from src.visuals.element import Element
@@ -13,41 +11,22 @@ class Interactive(Element):
         name: str = "",
         background_colour: pygame.Color | None = None,
         border_colour: pygame.Color | None = None,
-        is_enabled: bool = True,
-        is_active: bool = False,
         border_width: int = 4,
         border_radius: int = 0,
+        is_enabled: bool = True,
+        is_active: bool = False,
     ) -> None:
-        self.background_colour = background_colour
-        self.border_colour = border_colour
-        self.is_active = is_active
-        self.border_width = border_width
-        self.border_radius = border_radius
         super().__init__(
             position,
             size,
             name,
+            background_colour,
+            border_colour,
+            border_width,
+            border_radius,
             is_enabled,
         )
-
-    def display(self, screen: pygame.Surface) -> None:
-        if not self.is_enabled:
-            return
-        if self.background_colour:
-            pygame.draw.rect(
-                screen,
-                self.background_colour,
-                self.rect,
-                border_radius=self.border_radius,
-            )
-        if self.border_colour:
-            pygame.draw.rect(
-                screen,
-                self.border_colour,
-                self.rect,
-                self.border_width,
-                self.border_radius,
-            )
+        self.is_active = is_active
 
     def is_clicked(self, mouse_pos: tuple[int, int]) -> bool:
         """

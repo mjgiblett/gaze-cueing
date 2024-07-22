@@ -13,10 +13,10 @@ class InteractiveText(Interactive):
         name: str = "",
         background_colour: pygame.Color | None = None,
         border_colour: pygame.Color | None = None,
-        is_enabled: bool = True,
-        is_active: bool = False,
         border_width: int = 4,
         border_radius: int = 0,
+        is_enabled: bool = True,
+        is_active: bool = False,
     ) -> None:
         self.text = text
         super().__init__(
@@ -25,10 +25,10 @@ class InteractiveText(Interactive):
             name,
             background_colour,
             border_colour,
-            is_enabled,
-            is_active,
             border_width,
             border_radius,
+            is_enabled,
+            is_active,
         )
 
     def set_rect(self) -> None:
@@ -57,6 +57,6 @@ class InteractiveText(Interactive):
         self.rect = pygame.Rect(self.position, size)
         self.text.position = self.position
 
-    def display(self, screen: pygame.Surface) -> None:
-        super().display(screen)
-        self.text.display(screen)
+    def draw(self, surface: pygame.Surface) -> None:
+        super().draw(surface)
+        self.text.draw(surface)

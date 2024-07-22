@@ -14,10 +14,10 @@ class Button(InteractiveText):
         name: str = "",
         background_colour: pygame.Color | None = BLACK,
         border_colour: pygame.Color | None = None,
-        is_enabled: bool = True,
-        is_active: bool = False,
         border_width: int = 4,
         border_radius: int = 30,
+        is_enabled: bool = True,
+        is_active: bool = False,
     ) -> None:
         super().__init__(
             text,
@@ -26,10 +26,10 @@ class Button(InteractiveText):
             name,
             background_colour,
             border_colour,
-            is_enabled,
-            is_active,
             border_width,
             border_radius,
+            is_enabled,
+            is_active,
         )
 
     def clicked(self) -> None:
