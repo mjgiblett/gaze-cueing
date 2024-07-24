@@ -1,5 +1,6 @@
 """
-Defines visual utility functions.
+Defines visual utility functions, including displays for framerate and 
+trial information. 
 """
 
 import pygame
@@ -12,15 +13,17 @@ def show_fps(
     surface: pygame.Surface, clock: pygame.time.Clock, font: pygame.font.Font
 ) -> None:
     """
-    Displays application framerate in the top left corner.
+    Displays the application's framerate in the top left corner.
+
     Parameters
     ----------
     surface: pygame.Surface
-        Main window displaying the experiment.
+        The surface on which the framerate will be drawn on.
     clock: pygame.time.Clock
-        Pygame clock regulating the game's framerate.
+        The pygame clock regulating the application's framerate.
     font: pygame.font.Font
-        Font used to display the framerate.
+        The font of the text displaying the framerate.
+
     Returns
     -------
     None
@@ -32,14 +35,16 @@ def show_fps(
 def show_trial(screen: pygame.Surface, trial: Series, font: pygame.font.Font) -> None:
     """
     Displays information regarding the previous experimental trial.
+
     Parameters
     ----------
     surface: pygame.Surface
-        Main window displaying the experiment.
+        The surface on which the trial information will be drawn on.
     trial: pandas.Series
-        Array of trial variables.
+        An array of trial variables.
     font: pygame.font.Font
-        Font used to display the framerate.
+        The font of the text displaying the information.
+
     Returns
     -------
     None

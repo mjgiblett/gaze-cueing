@@ -30,7 +30,7 @@ def main(
         screen.fill(BG_GREY)
         action = controller.process_game_events()
         if SHOW_FRAMERATE:
-            show_fps(screen, clock, fonts.fonts["text"])
+            show_fps(screen, clock, fonts["text"])
         pygame.display.update()
         clock.tick(FRAMERATE)
     return action
@@ -50,10 +50,10 @@ if __name__ == "__main__":
         IS_FULLSCREEN,
         SHOW_FRAMERATE,
     )
-    from src.visuals import fonts
+    from src.visuals import fonts, init_fonts
 
     pygame.init()
-    fonts.init_fonts()
+    init_fonts()
 
     flags = 0
     size = (DISPLAY_WIDTH, DISPLAY_HEIGHT)
