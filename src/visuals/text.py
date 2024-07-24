@@ -1,6 +1,6 @@
 """
-This module defines the Text class, used to representing a single line
-of text. 
+This module defines the Text class, used to represent a single line of 
+text. 
 """
 import pygame
 
@@ -114,12 +114,12 @@ class Text(Element):
     @property
     def text_colour(self) -> pygame.Color:
         """
-        Gets or sets the text_colour of the text element.
+        Gets or sets the text colour of the text element.
 
         Returns
         -------
-        pygame.font.Font
-            The font of the text element.
+        pygame.Color
+            The text colour of the text element.
         """
         return self._text_colour
 
@@ -168,7 +168,7 @@ class Text(Element):
         self._rect = rect
         self._size = rect.size
 
-    def draw(self, screen: pygame.Surface) -> None:
+    def draw(self, surface: pygame.Surface) -> None:
         """
         Draws the text element on the provided surface if enabled.
 
@@ -183,4 +183,5 @@ class Text(Element):
         """
         if not self.is_enabled:
             return
-        screen.blit(self.render, self.rect)
+        super().draw(surface)
+        surface.blit(self.render, self.rect)
