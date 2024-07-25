@@ -4,7 +4,7 @@ at a specific position when enabled.
 """
 import pygame
 
-from src.visuals.element import Element
+from .element import Element
 
 
 class Image(Element):

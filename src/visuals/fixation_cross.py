@@ -8,7 +8,8 @@ import pygame
 from src.constants import BLACK
 from src.constants import FIXATION_CROSS_HEIGHT as HEIGHT
 from src.constants import FIXATION_CROSS_WIDTH as WIDTH
-from src.visuals.element import Element
+
+from .element import Element
 
 
 class FixationCross(Element):

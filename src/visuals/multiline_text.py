@@ -5,8 +5,9 @@ lines of text.
 import pygame
 
 from src.constants import BLACK
-from src.visuals.element import Element
-from src.visuals.text import Text
+
+from .element import Element
+from .text import Text
 
 
 class MultilineText(Element):

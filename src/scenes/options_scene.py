@@ -7,8 +7,7 @@ from src.constants import BG_GREY
 from src.gui.button import Button
 from src.gui.checkbox import Checkbox
 from src.scenes.scene import Scene
-from src.visuals.fonts import fonts
-from src.visuals.text import Text
+from src.visuals import Text, fonts
 
 
 class OptionsScene(Scene):

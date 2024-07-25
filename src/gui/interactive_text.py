@@ -1,7 +1,7 @@
 import pygame
 
 from src.gui.interactive import Interactive
-from src.visuals.text import Text
+from src.visuals import Text
 
 
 class InteractiveText(Interactive):

@@ -8,8 +8,7 @@ from src.components.stimuli import StimulusGazeDirection, StimulusSpecies
 from src.components.targets import TargetLetter, TargetLocation
 from src.components.trials import Response, Validity
 from src.scenes.scene import Scene
-from src.visuals.fonts import fonts
-from src.visuals.multiline_text import MultilineText
+from src.visuals import MultilineText, fonts
 
 
 class FinishedScene(Scene):

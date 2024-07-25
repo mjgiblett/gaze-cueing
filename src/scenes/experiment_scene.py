@@ -6,9 +6,7 @@ import pygame
 from src.components.trials import Response, trials_init
 from src.constants import INTER_TRIAL_INTERVAL, MAX_RESPONSE_TIME, TRIAL_DEBUGGING
 from src.scenes.scene import Scene
-from src.visuals.fixation_cross import FixationCross
-from src.visuals.fonts import fonts
-from src.visuals.multiline_text import MultilineText
+from src.visuals import FixationCross, MultilineText, fonts
 from src.visuals.tools import show_trial
 
 

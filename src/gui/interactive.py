@@ -1,6 +1,6 @@
 import pygame
 
-from src.visuals.element import Element
+from src.visuals import Element
 
 
 class Interactive(Element):

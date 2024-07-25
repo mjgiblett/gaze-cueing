@@ -4,7 +4,7 @@ from enum import IntEnum, auto
 import pygame
 
 from src.gui.interactive import Interactive
-from src.visuals.element import Element
+from src.visuals import Element
 
 
 class QuitActionType(IntEnum):

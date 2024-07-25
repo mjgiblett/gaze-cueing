@@ -7,9 +7,7 @@ from src.constants import BG_GREY, ERROR_RED
 from src.gui.button import Button
 from src.gui.input_box import InputBox
 from src.scenes.scene import Scene
-from src.visuals.fonts import fonts
-from src.visuals.multiline_text import MultilineText
-from src.visuals.text import Text
+from src.visuals import MultilineText, Text, fonts
 
 
 class DetailsScene(Scene):

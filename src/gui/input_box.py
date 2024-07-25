@@ -2,7 +2,7 @@ import pygame
 
 from src.constants import BLACK, WHITE
 from src.gui.interactive_text import InteractiveText
-from src.visuals.text import Text
+from src.visuals import Text
 
 
 class InputBox(InteractiveText):

@@ -5,7 +5,8 @@ text.
 import pygame
 
 from src.constants import BLACK
-from src.visuals.element import Element
+
+from .element import Element
 
 
 class Text(Element):
