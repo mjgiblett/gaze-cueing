@@ -3,6 +3,8 @@ Defines system fonts after pygame initialisation.
 """
 import pygame
 
+from src.constants import FONT_PROPERTIES
+
 fonts: dict[str, pygame.font.Font] = {}
 
 
@@ -10,8 +12,9 @@ def init_fonts() -> None:
     """
     Initialises fonts. Should be called immediantly after pygame initialisation.
     """
-    fonts["title"] = pygame.font.SysFont("calibri", 75, bold=True)
-    fonts["heading"] = pygame.font.SysFont("calibri", 40)
-    fonts["text"] = pygame.font.SysFont("calibri", 30)
-    fonts["small"] = pygame.font.SysFont("calibri", 20)
-    fonts["button"] = pygame.font.SysFont("calibri", 30, bold=True)
+    fonts.update(
+        {
+            name: pygame.font.SysFont(**kwargs)
+            for name, kwargs in FONT_PROPERTIES.items()
+        }
+    )

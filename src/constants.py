@@ -19,6 +19,17 @@ BLACK = pygame.Color("black")
 BG_GREY = pygame.Color(175, 175, 175)
 ERROR_RED = pygame.Color(244, 80, 105)
 
+# Fonts
+
+FONT_NAME = "calibri"
+FONT_PROPERTIES = {
+    "title": {"name": FONT_NAME, "size": 75, "bold": True},
+    "heading": {"name": FONT_NAME, "size": 40, "bold": False},
+    "text": {"name": FONT_NAME, "size": 30, "bold": False},
+    "small": {"name": FONT_NAME, "size": 20, "bold": False},
+    "button": {"name": FONT_NAME, "size": 30, "bold": True},
+}
+
 # Experiment parameters
 
 INTER_TRIAL_INTERVAL = 670
