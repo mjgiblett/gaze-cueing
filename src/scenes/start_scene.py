@@ -47,26 +47,14 @@ class StartScene(Scene):
             position=(x_centre, 700),
             name="next",
         )
-        option_button = Button(
-            text=Text("Options", font=fonts["button"], text_colour=BG_GREY),
-            position=(x_centre, 800),
-            name="option",
-        )
-
         self.elements.append(title)
         self.elements.append(instructions)
 
-        self.interactables.append(option_button)
         self.interactables.append(next_button)
-
-        self.options = False
 
     def button_down(self, _: int, pos: tuple[int, int]) -> None:
         for interactable in self.interactables:
             if not interactable.is_clicked(pos):
                 continue
             if interactable.name == "next":
-                self.progress = True
-            elif interactable.name == "option":
-                self.options = True
                 self.progress = True
