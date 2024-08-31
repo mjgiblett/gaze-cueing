@@ -23,15 +23,14 @@ class InputBox(InteractiveText):
         The width and height of the element.
     name : str
         The name of the element.
-    background_colour : pygame.Color | None, optional
-        The colour of the element's border. Defaults to None.
-    border_colour : pygame.Color | None, optional
-        The colour of the element's background. Defaults to None.
-    border_width : int, optional
-        The width of the element's border. Defaults to 4.
-    border_radius: int, optional
-        The radius of the border's rounded corners. Defaults to 0
-        (rectangle without rounded corners).
+    background_colour : pygame.Color | None
+        The colour of the element's border.
+    border_colour : pygame.Color | None
+        The colour of the element's background.
+    border_width : int
+        The width of the element's border.
+    border_radius: int
+        The radius of the border's rounded corners.
     is_enabled : bool
         A flag indicating whether the element is displayed.
     is_active : bool
@@ -73,7 +72,7 @@ class InputBox(InteractiveText):
         is_enabled: bool = True,
         is_active: bool = False,
         is_numeric: bool = False,
-        char_limit: int = 0,
+        char_limit: int = 20,
     ) -> None:
         """
         Initialises a new instance of the InputBox class.
@@ -107,7 +106,7 @@ class InputBox(InteractiveText):
             only. Defaults to False.
         char_limit : int
             The maximum number of characters the input box can display.
-            Defaults to 0 (no limit).
+            Defaults to 20.
         """
         super().__init__(
             text,
@@ -177,6 +176,6 @@ class InputBox(InteractiveText):
 
         if self.is_numeric and name.isnumeric():
             self.text.string += name
-        elif not self.is_numeric and (name.isalpha() or name.isnumeric()):
+        elif not self.is_numeric and len(name) == 1:
             self.text.string += name
         self.set_rect()

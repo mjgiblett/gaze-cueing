@@ -22,15 +22,14 @@ class Interactive(Element):
         The width and height of the element.
     name : str
         The name of the element.
-    background_colour : pygame.Color | None, optional
-        The colour of the element's border. Defaults to None.
-    border_colour : pygame.Color | None, optional
-        The colour of the element's background. Defaults to None.
-    border_width : int, optional
-        The width of the element's border. Defaults to 4.
-    border_radius: int, optional
-        The radius of the border's rounded corners. Defaults to 0
-        (rectangle without rounded corners).
+    background_colour : pygame.Color | None
+        The colour of the element's border.
+    border_colour : pygame.Color | None
+        The colour of the element's background.
+    border_width : int
+        The width of the element's border.
+    border_radius: int
+        The radius of the border's rounded corners.
     is_enabled : bool
         A flag indicating whether the element is displayed.
     is_active : bool
