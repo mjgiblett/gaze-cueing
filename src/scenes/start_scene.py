@@ -4,7 +4,7 @@ Defines StartScene class.
 import pygame
 
 from src.constants import BG_GREY
-from src.gui.button import Button
+from src.gui import Button
 from src.scenes.scene import Scene
 from src.visuals import MultilineText, Text, fonts
 

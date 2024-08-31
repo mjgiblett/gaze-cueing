@@ -4,8 +4,7 @@ Defines DetailsScene class.
 import pygame
 
 from src.constants import BG_GREY, ERROR_RED
-from src.gui.button import Button
-from src.gui.input_box import InputBox
+from src.gui import Button, InputBox
 from src.scenes.scene import Scene
 from src.visuals import MultilineText, Text, fonts
 

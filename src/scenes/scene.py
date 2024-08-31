@@ -3,7 +3,7 @@ from enum import IntEnum, auto
 
 import pygame
 
-from src.gui.interactive import Interactive
+from src.gui import Interactive
 from src.visuals import Element
 
 
