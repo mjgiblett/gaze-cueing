@@ -1,3 +1,8 @@
+"""
+This module defines a base class for interactive text GUI elements.
+The InteractiveText class includes essential attributes such as text, 
+position, size, name, colour, border, enabled, and active stutus.
+"""
 import pygame
 
 from src.gui.interactive import Interactive
@@ -5,6 +10,52 @@ from src.visuals import Text
 
 
 class InteractiveText(Interactive):
+    """
+    Base class for all interactive text GUI elements.
+
+    Attributes
+    ----------
+    text : Text
+        The Text of the element.
+    position : tuple[int, int]
+        The x, y coordinates of the element.
+    size : tuple[int, int]
+        The width and height of the element.
+    name : str
+        The name of the element.
+    background_colour : pygame.Color | None, optional
+        The colour of the element's border. Defaults to None.
+    border_colour : pygame.Color | None, optional
+        The colour of the element's background. Defaults to None.
+    border_width : int, optional
+        The width of the element's border. Defaults to 4.
+    border_radius: int, optional
+        The radius of the border's rounded corners. Defaults to 0
+        (rectangle without rounded corners).
+    is_enabled : bool
+        A flag indicating whether the element is displayed.
+    is_active : bool
+        A flag indicating whether the element is active.
+    rect : pygame.Rect
+        The rectangular area occupied by the element.
+
+    Methods
+    -------
+    draw(surface: pygame.Surface) -> None
+        Draws the element on the provided surface if enabled.
+    set_rect() -> None
+        Sets the rectangular area occupied by the element based on its
+        position and size.
+    is_clicked(mouse_pos: tuple[int, int]) -> bool
+        Detects whether the mouse clicks the element.
+    clicked() -> None
+        Peform function after element is clicked.
+    not_clicked() -> None
+        Peform function after element is not clicked.
+    key_down(key: int) -> None
+        Handles key down events.
+    """
+
     def __init__(
         self,
         text: Text,
@@ -18,6 +69,35 @@ class InteractiveText(Interactive):
         is_enabled: bool = True,
         is_active: bool = False,
     ) -> None:
+        """
+        Initialises a new instance of the InteractiveText class.
+
+        Parameters
+        ----------
+        text : Text
+            The Text of the element.
+        position : tuple[int, int], optional
+            The x, y coordinates of the element. Defaults to (0, 0).
+        size : tuple[int, int], optional
+            The width and height of the element. Defaults to (0, 0).
+        name : str, optional
+            The name of the element. Defaults to an empty string.
+        background_colour : pygame.Color | None, optional
+            The colour of the element's border. Defaults to None.
+        border_colour : pygame.Color | None, optional
+            The colour of the element's background. Defaults to None.
+        border_width : int, optional
+            The width of the element's border. Defaults to 4.
+        border_radius: int, optional
+            The radius of the border's rounded corners. Defaults to 0
+            (rectangle without rounded corners).
+        is_enabled : bool, optional
+            A flag indicating whether the element is displayed. Defaults
+            to True.
+        is_active : bool
+            A flag indicating whether the element is active. Defaults to
+            False.
+        """
         self.text = text
         super().__init__(
             position,
@@ -32,6 +112,14 @@ class InteractiveText(Interactive):
         )
 
     def set_rect(self) -> None:
+        """
+        Sets the rectangular area occupied by the element based on its
+        position and size.
+
+        Returns
+        -------
+        None
+        """
         char_size = self.text.font.size("_")
         if any(
             [
@@ -58,5 +146,17 @@ class InteractiveText(Interactive):
         self.text.position = self.position
 
     def draw(self, surface: pygame.Surface) -> None:
+        """
+        Draws the element on the provided surface if enabled.
+
+        Parameters
+        ----------
+        surface: pygame.Surface
+            The surface on which the element will be drawn on.
+
+        Returns
+        -------
+        None
+        """
         super().draw(surface)
         self.text.draw(surface)
