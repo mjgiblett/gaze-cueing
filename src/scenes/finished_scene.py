@@ -4,6 +4,7 @@ Defines FinishedScene class.
 
 import pygame
 
+from src.constants import SCREEN_DIMENSIONS, TEXT_FINISHED
 from src.scenes.scene import Scene
 from src.visuals import MultilineText, fonts
 
@@ -11,13 +12,12 @@ from src.visuals import MultilineText, fonts
 class FinishedScene(Scene):
     """
     The final scene of the experiment. Saves results and forces participant to quit or restart.
+
     Attributes
     ----------
     screen: pygame.Surface
         The main window displaying the experiment.
-    trials: pandas.DataFrame
-        Contains participant details as well as data from all trials in the experiment.
-        The
+
     Methods
     -------
     display()
@@ -29,12 +29,10 @@ class FinishedScene(Scene):
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(screen)
 
-        finished_text = MultilineText(
-            (
-                "Experiment completed!\nThank you for participating!\n\nPress ESCAPE to quit or R to restart."
-            ),
-            fonts["text"],
-            (self.screen.get_width() // 2, self.screen.get_height() // 2),
-        )
-
-        self.elements.append(finished_text)
+        self.elements = [
+            MultilineText(
+                string=TEXT_FINISHED,
+                font=fonts["text"],
+                position=SCREEN_DIMENSIONS["centre"],
+            )
+        ]

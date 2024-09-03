@@ -41,9 +41,9 @@ FONT_PROPERTIES = {
 
 # Experiment parameters
 
-INTER_TRIAL_INTERVAL = 670
-STIMULUS_ONSET_ASYNCS = (100, 300, 700)
-MAX_RESPONSE_TIME = 2000
+INTER_TRIAL_INTERVAL = 0  # 670
+STIMULUS_ONSET_ASYNCS = (0, 0)  # (100, 300, 700)
+MAX_RESPONSE_TIME = 0  # 2000
 
 FIXATION_CROSS_WIDTH = 4
 FIXATION_CROSS_HEIGHT = 20
@@ -80,4 +80,8 @@ TEXT_INSTRUCTIONS = (
     "\nthis type of experiment. Please terminate the experiment if you do."
     "\n\nIf you have read and understood all of this information, please"
     f"\nclick the '{TEXT_CONTINUE}' button when you are ready to continue."
+)
+TEXT_FINISHED = (
+    "Experiment complete!\nThank you for participating."
+    "\n\nPress ESCAPE to quit or R to restart."
 )
