@@ -1,3 +1,5 @@
+import os
+
 import pygame
 from pandas import DataFrame, ExcelWriter
 
@@ -151,6 +153,9 @@ class TrialManager:
                 for variable in variables
             }
         )
+
+        if not os.path.exists("data/"):
+            os.mkdir("data/")
 
         with ExcelWriter(f"data/{self.participant.id}.xlsx") as writer:
             df_trial_data.to_excel(writer, sheet_name="trial_data")
