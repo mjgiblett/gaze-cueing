@@ -4,6 +4,7 @@ Defines ExperimentScene class.
 
 import pygame
 
+from src.constants import SCREEN_DIMENSIONS, TEXT_REST
 from src.scenes.scene import Scene
 from src.visuals import Element, FixationCross, MultilineText, fonts
 
@@ -31,19 +32,14 @@ class ExperimentScene(Scene):
 
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(screen)
-        self.fixation_cross = FixationCross(screen)
 
+        centre_x = SCREEN_DIMENSIONS["centre"][0]
         self.is_resting = False
+        self.fixation_cross = FixationCross(screen)
         self.rest_text = MultilineText(
-            (
-                "Take a break!"
-                "\nWhen you are ready, press any key to continue with the experiment.\n"
-                "\nRemember:"
-                "\nIf the letter is an L, press the SPACE bar."
-                "\nIf the letter is a T, press the H key."
-            ),
-            fonts["text"],
-            (self.screen.get_width() // 2, 500),
+            string=TEXT_REST,
+            font=fonts["text"],
+            position=(centre_x, 500),
         )
 
     def display(self, elements: list[Element]) -> None:
