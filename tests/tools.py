@@ -4,7 +4,7 @@ from unittest.mock import Mock
 
 import pygame
 
-from src.constants import DISPLAY_HEIGHT, DISPLAY_WIDTH
+from src.services.screen import init_screen
 from src.visuals import Element, init_fonts
 
 
@@ -31,7 +31,8 @@ class BlitWrapper(pygame.Surface):
 def minimal_setup() -> pygame.Surface:
     pygame.init()
     init_fonts()
-    return pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
+    screen = init_screen()
+    return screen
 
 
 def test_draw_rect(
