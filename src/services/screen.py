@@ -9,6 +9,7 @@ from src.constants import (
     STIMULUS_SCALE,
     TARGET_OFFSET,
     TARGET_SCALE,
+    TEXT_TITLE,
 )
 
 
@@ -18,7 +19,7 @@ def init_screen() -> pygame.Surface:
     if IS_FULLSCREEN:
         size = (0, 0)
         flags = pygame.FULLSCREEN
-    pygame.display.set_caption("Gaze Cueing Experiment")
+    pygame.display.set_caption(TEXT_TITLE)
     screen = pygame.display.set_mode(size, flags)
     x, y = screen.get_size()
     SCREEN_DIMENSIONS.update(

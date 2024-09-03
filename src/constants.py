@@ -62,3 +62,22 @@ SPECIES_COUNTERBALANCING = True  # Complete one species condition before the oth
 COUNTERBALANCING_ASCENDING = (
     False  # Determines the order of counterbalancing. Humans first when True.
 )
+
+# Text
+
+TEXT_CONTINUE = "Continue"
+TEXT_TITLE = "Gaze Cueing Experiment"
+TEXT_INSTRUCTIONS = (
+    "This experiment is part of a project examining the tuning properties"
+    "\nunderlying our capacity to follow gaze direction cues in more naturalistic"
+    "\nphotographs of faces. In this experiment you will be responding to letters"
+    "\nappearing to the left or right of a central face."
+    "\n\nIf the letter is an L, press the SPACE bar. If the letter is a T, press the H key."
+    "\nIt is important that you respond as quickly and accurately as you can."
+    "\nOnce the experiment begins, it will take 25 - 30 minutes to complete."
+    "\nYou may terminate the experiment at any time by pressing the ESCAPE key."
+    "\nSome people can experience discomfort (such as a headache) while doing"
+    "\nthis type of experiment. Please terminate the experiment if you do."
+    "\n\nIf you have read and understood all of this information, please"
+    f"\nclick the '{TEXT_CONTINUE}' button when you are ready to continue."
+)
