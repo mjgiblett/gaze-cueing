@@ -1,6 +1,7 @@
 """
 Defines SceneManager class, which handles pygame events and game scenes.
 """
+
 import pygame
 
 from src.scenes.details_scene import DetailsScene
@@ -8,6 +9,7 @@ from src.scenes.experiment_scene import ExperimentScene
 from src.scenes.finished_scene import FinishedScene
 from src.scenes.scene import QuitActionType, Scene
 from src.scenes.start_scene import StartScene
+from src.services.trial_manager import TrialManager
 
 
 class SceneManager:
@@ -27,6 +29,8 @@ class SceneManager:
 
     def __init__(self, screen: pygame.Surface) -> None:
         self.active_scene: Scene = StartScene(screen)
+        self.trial_manager: TrialManager = TrialManager()
+        self.time = 0
 
     def process_game_events(self) -> QuitActionType:
         """
@@ -36,7 +40,9 @@ class SceneManager:
         QuitActionType
             Communicates whether program should continue, quit, or restart.
         """
+        self.time = pygame.time.get_ticks()
         quit_action = QuitActionType.CONTINUE
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return QuitActionType.QUIT
@@ -52,12 +58,24 @@ class SceneManager:
                     self.active_scene, FinishedScene
                 ):
                     return QuitActionType.RESTART
+                if isinstance(self.active_scene, ExperimentScene):
+                    self.trial_manager.key_down(self.time, event.key)
                 self.active_scene.key_down(event.key)
+
         if self.active_scene.update_state():
             self.start_new_scene()
             return QuitActionType.CONTINUE
 
-        self.active_scene.display()
+        if isinstance(self.active_scene, ExperimentScene):
+            if self.trial_manager.has_experiment_finished:
+                self.start_new_scene()
+                return QuitActionType.CONTINUE
+            elements = self.trial_manager.during_trial(self.time)
+            self.active_scene.is_resting = self.trial_manager.is_resting
+            self.active_scene.display(elements)
+        else:
+            self.active_scene.display()
+
         return quit_action
 
     def start_new_scene(self) -> None:
@@ -71,10 +89,12 @@ class SceneManager:
         if isinstance(self.active_scene, StartScene):
             self.active_scene = DetailsScene(self.active_scene.screen)
         elif isinstance(self.active_scene, DetailsScene):
-            self.active_scene = ExperimentScene(
-                self.active_scene.screen, self.active_scene.participant_details
-            )
+            if self.active_scene.participant:
+                self.trial_manager.participant = self.active_scene.participant
+            else:
+                assert self.active_scene.participant, "No Participant"
+            self.active_scene = ExperimentScene(self.active_scene.screen)
+            self.trial_manager.start_experiment(self.time)
         elif isinstance(self.active_scene, ExperimentScene):
-            self.active_scene = FinishedScene(
-                self.active_scene.screen, self.active_scene.trials
-            )
+            self.active_scene = FinishedScene(self.active_scene.screen)
+            self.trial_manager.end_experiment(self.time)

@@ -1,9 +1,11 @@
 """
-Entry point to the experiment. Initiates pygame, fonts, main window, and game loop. 
+Entry point to the experiment. Initiates pygame, fonts, main window, and game loop.
 """
+
 import pygame
 
 from src.services.scene_manager import QuitActionType, SceneManager
+from src.services.screen import init_screen
 from src.visuals.tools import show_fps
 
 
@@ -40,31 +42,13 @@ if __name__ == "__main__":
     import subprocess
     import sys
 
-    from src.components.stimuli import init_stimuli
-    from src.components.targets import init_targets
-    from src.constants import (
-        BG_GREY,
-        DISPLAY_HEIGHT,
-        DISPLAY_WIDTH,
-        FRAMERATE,
-        IS_FULLSCREEN,
-        SHOW_FRAMERATE,
-    )
+    from src.constants import BG_GREY, FRAMERATE, SHOW_FRAMERATE
     from src.visuals import fonts, init_fonts
 
     pygame.init()
     init_fonts()
 
-    flags = 0
-    size = (DISPLAY_WIDTH, DISPLAY_HEIGHT)
-    if IS_FULLSCREEN:
-        size = (0, 0)
-        flags = pygame.FULLSCREEN
-    pygame.display.set_caption("Gaze Cueing Experiment")
-    screen = pygame.display.set_mode(size, flags)
-
-    init_stimuli(screen)
-    init_targets(screen)
+    screen = init_screen()
 
     scene_manager = SceneManager(screen)
     quit_action = main(scene_manager, screen, pygame.time.Clock())

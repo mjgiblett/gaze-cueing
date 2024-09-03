@@ -1,8 +1,10 @@
 """
 Defines DetailsScene class.
 """
+
 import pygame
 
+from src.components import Participant
 from src.constants import BG_GREY, ERROR_RED
 from src.gui import Button, InputBox
 from src.scenes.scene import Scene
@@ -32,7 +34,7 @@ class DetailsScene(Scene):
 
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(screen)
-        self.participant_details: dict[str, int] = {}
+        self.participant = None
         x_centre = self.screen.get_size()[0] // 2
 
         title = Text("Participant Details", fonts["title"], (x_centre, 200))
@@ -93,7 +95,7 @@ class DetailsScene(Scene):
         )
         input_number = InputBox(
             text=Text(string="", font=fonts["text"]),
-            name="number",
+            name="id",
             position=(x_centre, 400),
             is_numeric=True,
             char_limit=300,
@@ -145,6 +147,7 @@ class DetailsScene(Scene):
                 return
 
     def button_down(self, _: int, pos: tuple[int, int]) -> None:
+        participant_details: dict[str, int] = {}
         for interactable in self.interactables:
             is_clicked = interactable.is_clicked(pos)
             for element in self.elements:
@@ -179,6 +182,7 @@ class DetailsScene(Scene):
                         box.text.string = ""
                         box.background_colour = ERROR_RED
                         return
-                self.participant_details[title] = int(box.text.string)
+                participant_details[title] = int(box.text.string)
+            self.participant = Participant(**participant_details)
             self.progress = True
             return

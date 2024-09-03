@@ -1,7 +1,5 @@
 import unittest
 
-import pygame
-
 from src.scenes.start_scene import StartScene
 from tests.tools import minimal_setup
 

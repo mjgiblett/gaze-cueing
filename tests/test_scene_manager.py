@@ -2,6 +2,7 @@ import unittest
 
 import pygame
 
+from src.components import Participant
 from src.scenes.details_scene import DetailsScene
 from src.scenes.experiment_scene import ExperimentScene
 from src.scenes.finished_scene import FinishedScene
@@ -38,6 +39,7 @@ class TestSceneManager(unittest.TestCase):
         # details scene
         self.scene_manager.start_new_scene()
         self.assertIsInstance(self.scene_manager.active_scene, DetailsScene)
+        self.scene_manager.active_scene.participant = Participant(1, 1, 1, 1)
         # experiment scene
         self.scene_manager.start_new_scene()
         self.assertIsInstance(self.scene_manager.active_scene, ExperimentScene)

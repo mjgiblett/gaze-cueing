@@ -1,13 +1,11 @@
 """
 Defines ExperimentScene class.
 """
+
 import pygame
 
-from src.components.trials import Response, trials_init
-from src.constants import INTER_TRIAL_INTERVAL, MAX_RESPONSE_TIME, TRIAL_DEBUGGING
 from src.scenes.scene import Scene
-from src.visuals import FixationCross, MultilineText, fonts
-from src.visuals.tools import show_trial
+from src.visuals import Element, FixationCross, MultilineText, fonts
 
 
 class ExperimentScene(Scene):
@@ -31,18 +29,11 @@ class ExperimentScene(Scene):
         Begins the next trial of the experiment once the active trial is complete.
     """
 
-    def __init__(
-        self, screen: pygame.Surface, participant_details: dict[str, int]
-    ) -> None:
+    def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(screen)
         self.fixation_cross = FixationCross(screen)
-        pygame.mouse.set_visible(False)
 
-        self.trials = trials_init(participant_details)
-        self.trials_count = len(self.trials.index)
-        self.trial_number = -1
-
-        self.rest = False
+        self.is_resting = False
         self.rest_text = MultilineText(
             (
                 "Take a break!"
@@ -55,77 +46,10 @@ class ExperimentScene(Scene):
             (self.screen.get_width() // 2, 500),
         )
 
-        self.next_trial()
-
-    def display(self) -> None:
-        if self.rest:
+    def display(self, elements: list[Element]) -> None:
+        if self.is_resting:
             self.rest_text.draw(self.screen)
             return
-        time = pygame.time.get_ticks()
-        if TRIAL_DEBUGGING and self.trial_number > 0:
-            show_trial(
-                self.screen, self.trials.loc[self.trial_number - 1], fonts["small"]
-            )
-
         self.fixation_cross.draw(self.screen)
-
-        if time >= self.display_stimulus_time:
-            self.current_stimulus.draw(self.screen)
-        if time >= self.display_target_time:
-            self.current_target.draw(self.screen)
-        if time - self.display_target_time >= MAX_RESPONSE_TIME:
-            self.next_trial()
-
-    def key_down(self, key: int) -> None:
-        time = pygame.time.get_ticks()
-        if self.rest:
-            if time > self.trial_start_time + 2000:
-                self.next_trial()
-            return
-        if time < self.display_target_time:
-            return
-        name = pygame.key.name(key)
-        if name not in ["space", "h"]:
-            return
-        response = Response.SPACE if name == "space" else Response.H
-        self.trials.at[self.trial_number, "response"] = response.value
-
-        accuracy = response.value == self.trials.at[self.trial_number, "target_letter"]
-        self.trials.at[self.trial_number, "response_accuracy"] = int(accuracy)
-
-        self.next_trial()
-
-    def next_trial(self) -> None:
-        """
-        Begins the next trial of the experiment once the active trial is complete.
-        Returns
-        -------
-        None
-        """
-        time = pygame.time.get_ticks()
-        if self.trial_number == -1:
-            self.trial_start_time = time + 1000
-        else:
-            self.trials.at[self.trial_number, "reaction_time"] = (
-                time - self.display_target_time
-            )
-            self.trial_start_time = time
-
-        if self.rest:
-            self.rest = False
-        else:
-            if self.trial_number == (self.trials_count // 2):
-                self.rest = True
-                return
-
-        self.trial_number += 1
-        if self.trial_number >= self.trials_count:
-            self.progress = True
-            return
-
-        self.display_stimulus_time = self.trial_start_time + INTER_TRIAL_INTERVAL
-        self.display_target_time = (
-            self.display_stimulus_time + self.trials.at[self.trial_number, "soa"]
-        )
-        self.current_stimulus = self.trials.at[self.trial_number, "stimulus_image"]
-        self.current_target = self.trials.at[self.trial_number, "target_image"]
+        for image in elements:
+            image.draw(self.screen)
