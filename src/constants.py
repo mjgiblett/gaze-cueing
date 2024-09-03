@@ -1,16 +1,25 @@
 """
 Module providing default project constants.
 """
+
 import pygame
+
+# resources paths
+
+STIMULI_PATH = "resources/stimuli"
+TARGETS_PATH = "resources/targets"
 
 # Display
 
 FRAMERATE = 144
-SHOW_FRAMERATE = False
+TRIAL_DEBUGGING = False
+SHOW_FRAMERATE = False or TRIAL_DEBUGGING
 
 IS_FULLSCREEN = True
-DISPLAY_WIDTH = 1200
-DISPLAY_HEIGHT = 1200
+DISPLAY_WIDTH = 1920
+DISPLAY_HEIGHT = 1080
+SCREEN_DIMENSIONS: dict[str, tuple[int, int]] = {}
+POSITIONS: dict[str, tuple[int, int]] = {}
 
 # Colours
 
@@ -45,7 +54,9 @@ STIMULUS_SCALE = (400, 400)
 TARGET_OFFSET = 500
 
 RANDOM_TRIAL_ORDER = True
-TRIAL_DEBUGGING = False
+
+FIRST_TRIAL_DELAY = 1000
+MINIMUM_REST_TIME = 2000
 
 SPECIES_COUNTERBALANCING = True  # Complete one species condition before the other.
 COUNTERBALANCING_ASCENDING = (
