@@ -2,10 +2,28 @@
 Defines DetailsScene class.
 """
 
+from pathlib import Path
+
 import pygame
 
 from src.components import Participant
-from src.constants import BG_GREY, ERROR_RED
+from src.constants import (
+    BG_GREY,
+    DATA_PATH,
+    ERROR_RED,
+    SCREEN_DIMENSIONS,
+    TEXT_AGE,
+    TEXT_AGE_INFO,
+    TEXT_CONTINUE,
+    TEXT_CULTURE,
+    TEXT_CULTURE_INFO,
+    TEXT_GENDER,
+    TEXT_GENDER_INFO,
+    TEXT_ID,
+    TEXT_ID_INFO,
+    TEXT_INSTRUCTIONS_DETAILS,
+    TEXT_TITLE,
+)
 from src.gui import Button, InputBox
 from src.scenes.scene import Scene
 from src.visuals import MultilineText, Text, fonts
@@ -34,109 +52,114 @@ class DetailsScene(Scene):
 
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(screen)
+
+        id = 1
+        for file in Path(DATA_PATH).rglob("*.xlsx"):
+            if file.stem.isnumeric():
+                num = int(file.stem)
+                id = num if num > id else id
+        centre_x = SCREEN_DIMENSIONS["centre"][0]
+
         self.participant = None
-        x_centre = self.screen.get_size()[0] // 2
-
-        title = Text("Participant Details", fonts["title"], (x_centre, 200))
-        heading_number = Text("NUMBER", fonts["heading"], (x_centre, 350))
-        heading_age = Text("AGE", fonts["heading"], (x_centre, 450))
-        heading_gender = Text("GENDER", fonts["heading"], (x_centre, 550))
-        heading_culture = Text("CULTURE", fonts["heading"], (x_centre, 650))
-
-        info_number = Text(
-            "Please enter your participant number.",
-            fonts["text"],
-            (x_centre, 850),
-            name="number",
-            is_enabled=False,
-        )
-        info_age = Text(
-            "Please enter your age in years. Minimum 18.",
-            fonts["text"],
-            (x_centre, 850),
-            name="age",
-            is_enabled=False,
-        )
-        info_gender = MultilineText(
-            (
-                "Please indicate the category that best describes your gender:"
-                "\n1 - male"
-                "\n2 - female"
-                "\n3 - unspecified"
+        self.elements = [
+            Text(
+                string=TEXT_TITLE,
+                font=fonts["title"],
+                position=(centre_x, 150),
             ),
-            fonts["text"],
-            (x_centre, 850),
-            name="gender",
-            is_enabled=False,
-        )
-        info_culture = MultilineText(
-            (
-                "Please indicate the category that best describes your cultural background:"
-                "\n1 - Caucasian"
-                "\n2 - Asian (including Indian, south Asian, and multiracial Asian)"
-                "\n3 - Indigenous Australian"
-                "\n4 - African"
-                "\n5 - Hispanic"
-                "\n6 - Middle Eastern"
-                "\n7 - Pacific Islander"
-                "\n8 - other not listed"
-                "\n9 - unspecified or prefer not to answer"
+            Text(
+                string=TEXT_INSTRUCTIONS_DETAILS,
+                font=fonts["text"],
+                position=(centre_x, 280),
             ),
-            fonts["small"],
-            (x_centre, 850),
-            name="culture",
-            is_enabled=False,
-        )
-
-        start_button = Button(
-            Text("Start", fonts["button"], text_colour=BG_GREY),
-            (x_centre, 780),
-            name="start",
-        )
-        input_number = InputBox(
-            text=Text(string="", font=fonts["text"]),
-            name="id",
-            position=(x_centre, 400),
-            is_numeric=True,
-            char_limit=300,
-        )
-        input_age = InputBox(
-            text=Text("", font=fonts["text"]),
-            name="age",
-            position=(x_centre, 500),
-            is_numeric=True,
-            char_limit=3,
-        )
-        input_gender = InputBox(
-            text=Text("", font=fonts["text"]),
-            name="gender",
-            position=(x_centre, 600),
-            is_numeric=True,
-            char_limit=1,
-        )
-        input_culture = InputBox(
-            text=Text("", font=fonts["text"]),
-            name="culture",
-            position=(x_centre, 700),
-            is_numeric=True,
-            char_limit=1,
-        )
-
-        self.elements.append(title)
-        self.elements.append(heading_number)
-        self.elements.append(heading_age)
-        self.elements.append(heading_gender)
-        self.elements.append(heading_culture)
-        self.elements.append(info_number)
-        self.elements.append(info_age)
-        self.elements.append(info_gender)
-        self.elements.append(info_culture)
-
-        self.interactables.append(start_button)
-        self.interactables.append(input_number)
-        self.interactables.append(input_age)
-        self.interactables.append(input_gender)
-        self.interactables.append(input_culture)
+            Text(
+                string=TEXT_ID,
+                font=fonts["heading"],
+                position=(centre_x, 350),
+            ),
+            Text(
+                string=TEXT_AGE,
+                font=fonts["heading"],
+                position=(centre_x, 450),
+            ),
+            Text(
+                string=TEXT_GENDER,
+                font=fonts["heading"],
+                position=(centre_x, 550),
+            ),
+            Text(
+                string=TEXT_CULTURE,
+                font=fonts["heading"],
+                position=(centre_x, 650),
+            ),
+            Text(
+                string=TEXT_ID_INFO,
+                font=fonts["text"],
+                position=(centre_x, 850),
+                name=TEXT_ID,
+                is_enabled=False,
+            ),
+            Text(
+                string=TEXT_AGE_INFO,
+                font=fonts["text"],
+                position=(centre_x, 850),
+                name=TEXT_AGE,
+                is_enabled=False,
+            ),
+            MultilineText(
+                string=TEXT_GENDER_INFO,
+                font=fonts["text"],
+                position=(centre_x, 850),
+                name=TEXT_GENDER,
+                is_enabled=False,
+            ),
+            MultilineText(
+                string=TEXT_CULTURE_INFO,
+                font=fonts["small"],
+                position=(centre_x, 850),
+                name=TEXT_CULTURE,
+                is_enabled=False,
+            ),
+        ]
+        self.interactables = [
+            Button(
+                Text(
+                    string=TEXT_CONTINUE,
+                    font=fonts["button"],
+                    text_colour=BG_GREY,
+                ),
+                position=(centre_x, 780),
+                name=TEXT_CONTINUE,
+            ),
+            InputBox(
+                text=Text(string=str(id), font=fonts["text"]),
+                name=TEXT_ID,
+                position=(centre_x, 400),
+                is_numeric=True,
+                char_limit=6,
+            ),
+            InputBox(
+                text=Text("", font=fonts["text"]),
+                name=TEXT_AGE,
+                position=(centre_x, 500),
+                is_numeric=True,
+                char_limit=3,
+            ),
+            InputBox(
+                text=Text("", font=fonts["text"]),
+                name=TEXT_GENDER,
+                position=(centre_x, 600),
+                is_numeric=True,
+                char_limit=1,
+            ),
+            InputBox(
+                text=Text("", font=fonts["text"]),
+                name=TEXT_CULTURE,
+                position=(centre_x, 700),
+                is_numeric=True,
+                char_limit=1,
+            ),
+        ]
 
     def key_down(self, key: int) -> None:
         for interactable in self.interactables:
@@ -158,31 +181,32 @@ class DetailsScene(Scene):
                 element.is_enabled = is_clicked
             if not is_clicked:
                 continue
-            if interactable.name != "start":
+            if interactable.name != TEXT_CONTINUE:
                 continue
             for box in self.interactables:
                 if not isinstance(box, InputBox):
                     continue
                 title = box.name
                 if box.text.string == "":
+                    box.background_colour = ERROR_RED
                     return
                 val = int(box.text.string)
-                if title == "age":
+                if title == TEXT_AGE:
                     if val < 18 or val > 120:
                         box.text.string = ""
                         box.background_colour = ERROR_RED
                         return
-                elif title == "gender":
+                elif title == TEXT_GENDER:
                     if val not in (1, 2, 3):
                         box.text.string = ""
                         box.background_colour = ERROR_RED
                         return
-                elif title == "culture":
+                elif title == TEXT_CULTURE:
                     if val not in range(1, 10):
                         box.text.string = ""
                         box.background_colour = ERROR_RED
                         return
-                participant_details[title] = int(box.text.string)
+                participant_details[title.lower()] = int(box.text.string)
             self.participant = Participant(**participant_details)
             self.progress = True
             return

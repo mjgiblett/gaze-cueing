@@ -6,6 +6,7 @@ import pygame
 
 # resources paths
 
+DATA_PATH = "data/"
 STIMULI_PATH = "resources/stimuli"
 TARGETS_PATH = "resources/targets"
 
@@ -26,16 +27,17 @@ POSITIONS: dict[str, tuple[int, int]] = {}
 WHITE = pygame.Color("white")
 BLACK = pygame.Color("black")
 BG_GREY = pygame.Color(175, 175, 175)
-ERROR_RED = pygame.Color(244, 80, 105)
+BG_SELECTED = pygame.Color(220, 220, 220)
+ERROR_RED = pygame.Color(255, 0, 51)
 
 # Fonts
 
 FONT_NAME = "calibri"
 FONT_PROPERTIES = {
     "title": {"name": FONT_NAME, "size": 75, "bold": True},
-    "heading": {"name": FONT_NAME, "size": 40, "bold": False},
+    "heading": {"name": FONT_NAME, "size": 35, "bold": True},
     "text": {"name": FONT_NAME, "size": 30, "bold": False},
-    "small": {"name": FONT_NAME, "size": 20, "bold": False},
+    "small": {"name": FONT_NAME, "size": 25, "bold": False},
     "button": {"name": FONT_NAME, "size": 30, "bold": True},
 }
 
@@ -63,7 +65,9 @@ COUNTERBALANCING_ASCENDING = (
     False  # Determines the order of counterbalancing. Humans first when True.
 )
 
-# Text
+# --- Text ---
+
+# Start
 
 TEXT_CONTINUE = "Continue"
 TEXT_TITLE = "Gaze Cueing Experiment"
@@ -81,6 +85,39 @@ TEXT_INSTRUCTIONS = (
     "\n\nIf you have read and understood all of this information, please"
     f"\nclick the '{TEXT_CONTINUE}' button when you are ready to continue."
 )
+
+# Details
+
+TEXT_INSTRUCTIONS_DETAILS = "Please fill out the following details about yourself."
+
+TEXT_ID = "ID"
+TEXT_AGE = "Age"
+TEXT_GENDER = "Gender"
+TEXT_CULTURE = "Culture"
+
+TEXT_ID_INFO = "Please type your participant ID."
+TEXT_AGE_INFO = "Please type your age in years."
+TEXT_GENDER_INFO = (
+    "Please indicate the category that best describes your gender:"
+    "\n1 - male"
+    "\n2 - female"
+    "\n3 - unspecified"
+)
+TEXT_CULTURE_INFO = (
+    "Please indicate the category that best describes your cultural background:"
+    "\n1 - Caucasian"
+    "\n2 - Asian (including Indian, south Asian, and multiracial Asian)"
+    "\n3 - Indigenous Australian"
+    "\n4 - African"
+    "\n5 - Hispanic"
+    "\n6 - Middle Eastern"
+    "\n7 - Pacific Islander"
+    "\n8 - other not listed"
+    "\n9 - unspecified or prefer not to answer"
+)
+
+# Experiment
+
 TEXT_REST = (
     "Take a break!"
     "\nWhen you are ready, press any key to continue with the experiment."
@@ -88,6 +125,9 @@ TEXT_REST = (
     "\nIf the letter is an L, press the SPACE bar."
     "\nIf the letter is a T, press the H key."
 )
+
+# Finished
+
 TEXT_FINISHED = (
     "Experiment complete!\nThank you for participating."
     "\n\nPress ESCAPE to quit or R to restart."

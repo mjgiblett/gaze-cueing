@@ -2,9 +2,10 @@
 This module defines the InputBox class, an interactive element allowing
 users to input text and numbers. 
 """
+
 import pygame
 
-from src.constants import BLACK, WHITE
+from src.constants import BG_SELECTED, BLACK
 from src.gui.interactive_text import InteractiveText
 from src.visuals import Text
 
@@ -132,7 +133,7 @@ class InputBox(InteractiveText):
         None
         """
         self.is_active = True
-        self.background_colour = WHITE
+        self.background_colour = BG_SELECTED
 
     def not_clicked(self) -> None:
         """
